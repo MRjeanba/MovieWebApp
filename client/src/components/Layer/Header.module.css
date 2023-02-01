@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    color: #906090;
+    font-weight: bold;
+}
+
+button{
+    border-radius: 7px;
+    height: fit-content;
+    margin: auto;
+    margin-right: 15px;
+    height: 50%;
+    color: #001449;
+    background-color: #906090;
+    border: 0;
+}
+button:hover{
+    height: 40%;
+    background-color: #dd77dd;
+}
+button:active{
+    
+    height: 60%;
+    background-color: #dd77dd;
+}
+
+header {
+    position: absolute;
+    display: flex;
+    background-color: #001449;
+    color: white;
+    width: 100%;
+    min-height: 7%;
+    justify-content: space-between;
+}
+
+h2{
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+div{
+    display: flex;
+    justify-content: space-around;
+}
+
+div p {
+    margin: auto;
+    margin-right: 10px;
+}
