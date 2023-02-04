@@ -1,0 +1,11 @@
+
+.card{
+    float: none;
+    /* display: inline-block; */
+    width: 80%;
+    margin: auto;
+    margin-top: 30%;
+    height: 800px;
+    margin-bottom: 10%;
+    /* height: 50%; */
+}

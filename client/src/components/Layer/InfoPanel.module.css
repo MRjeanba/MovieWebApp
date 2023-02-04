@@ -1,0 +1,22 @@
+
+.panel{
+    position: absolute;
+    width: 80%;
+    margin: auto;
+    margin-top: 15%;
+    height: 15%;
+    text-align: center;
+    display: inline-block;
+
+}
+
+
+.text{
+    width: 50%;
+    margin: auto;
+    font-weight: bold;
+}
+
+.text.title{
+    margin-bottom: 1%;
+}

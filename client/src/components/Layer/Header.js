@@ -5,8 +5,8 @@ const Header = () => {
 
     return(
         <header>
-            <h2>Cool Title</h2>
-
+            <h2>My Movie App</h2>
+            
 
             <div>
                 <Button>+Add Movie</Button>

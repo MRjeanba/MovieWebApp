@@ -1,6 +1,6 @@
 *{
     margin: 0;
-    color: #906090;
+    color: white;
     font-weight: bold;
 }
 
@@ -9,7 +9,7 @@ button{
     height: fit-content;
     margin: auto;
     margin-right: 15px;
-    height: 50%;
+    height: 60%;
     color: #001449;
     background-color: #906090;
     border: 0;
@@ -27,7 +27,6 @@ button:active{
 header {
     position: absolute;
     display: flex;
-    background-color: #001449;
     color: white;
     width: 100%;
     min-height: 7%;
@@ -36,7 +35,7 @@ header {
 
 h2{
     margin-top: 1%;
-    margin-left: 1%;
+    margin-left: 3%;
 }
 
 div{
