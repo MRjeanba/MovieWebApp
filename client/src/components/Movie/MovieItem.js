@@ -3,10 +3,12 @@ import styles from './MovieItem.module.css';
 
 const MovieItem = (props) => {
 
-    <div className={styles.movieItem}>
-        <h3>{props.title}</h3>
-        <p>{props.review}</p>
-    </div>
+    return (
+        <div className={styles.movieItem}>
+            <h3>{props.title}</h3>
+            <p>{props.review}</p>
+        </div>
+    )
 };
 
 export default MovieItem;

@@ -1,7 +1,13 @@
 
 
 .movieItem{
+    margin: auto;
     border-radius: 8px;
-    background-color: red;
-    height: 10%;
+    background-color: rgb(145, 23, 182);
+    height: 100%;
+    width: 100px;
+    color: white;
+    display: block;
+    text-align: center;
 }
+

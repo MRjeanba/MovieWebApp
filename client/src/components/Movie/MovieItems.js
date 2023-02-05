@@ -4,30 +4,33 @@
 import MovieItem from './MovieItem';
 import styles from './MovieItems.module.css';
 
-const DUMMY_MOVIES = [
-    {
-        name: 'Lord of the Rings',
-        review: 5,
-        duration: '2h30'
-    },
-    {
-        name: 'Harry Poter 1',
-        review: 5,
-        duration: '2h00'
-    },
-    {
-        name: 'E.T ',
-        review: 5,
-        duration: '2h00'
-    }
-];
 
 
 const MovieItems = (props) => {
 
+    const DUMMY_MOVIES = [
+        {
+            name: 'Lord of the Rings',
+            review: 5,
+            duration: '2h30',
+            id: Math.random()*7,
+        },
+        {
+            name: 'Harry Poter 1',
+            review: 5,
+            duration: '2h00',
+            id: Math.random()*7,
+        },
+        {
+            name: 'E.T ',
+            review: 5,
+            duration: '2h00',
+            id: Math.random()*7,
+        }
+    ];
     return (
         <div className={styles.items}>
-            {DUMMY_MOVIES.map((movie) => { return <li><MovieItem title={movie.name} review={movie.review} /> </li>})}
+            {DUMMY_MOVIES.map((movie) => { return (<li><MovieItem title={movie.name} review={movie.review}/></li> )})}
         </div>
     )
 };
