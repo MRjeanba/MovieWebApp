@@ -4,10 +4,11 @@ import styles from './MovieItem.module.css';
 const MovieItem = (props) => {
 
     return (
-        <div className={styles.movieItem}>
-            <h3>{props.title}</h3>
-            <p>{props.review}</p>
-        </div>
+        <li className={styles.movieItem}>
+            <h2>{props.title}</h2>
+            <h3>{props.duration}</h3>
+            <p>Users review : {props.review} / 5</p>
+        </li>
     )
 };
 

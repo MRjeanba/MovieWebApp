@@ -29,9 +29,9 @@ const MovieItems = (props) => {
         }
     ];
     return (
-        <div className={styles.items}>
-            {DUMMY_MOVIES.map((movie) => { return (<li><MovieItem title={movie.name} review={movie.review}/></li> )})}
-        </div>
+        <ul className={styles.items}>
+            {DUMMY_MOVIES.map((movie) => { return (<MovieItem title={movie.name} review={movie.review} duration={movie.duration}/> )})}
+        </ul>
     )
 };
 
