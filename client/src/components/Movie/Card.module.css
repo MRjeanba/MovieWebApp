@@ -1,10 +1,9 @@
 
 .card{
-    /* display: inline-block; */
-    width: 80%;
+    display: flex;
+    width: 90%;
     margin: auto;
     margin-top: 32%;
-    height: 800px;
     margin-bottom: 10%;
-    /* height: 50%; */
+    min-height: 800px;
 }

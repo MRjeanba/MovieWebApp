@@ -2,8 +2,8 @@ html {
     /* To make use of full height of page*/
     min-height: 100%;
     margin: 0;
-    overflow:auto;
     background-image: linear-gradient(to bottom right, #7f9ae4, #071a4e);
+    overflow:auto;
 
 }
 body {

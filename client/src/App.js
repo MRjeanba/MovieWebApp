@@ -10,9 +10,9 @@ function App() {
       <Header />
       <InfoPanel />
       
-      <Card>
+      {/* <Card> */}
         <MovieItems />
-      </Card>
+      {/* </Card> */}
     </>
 
   );

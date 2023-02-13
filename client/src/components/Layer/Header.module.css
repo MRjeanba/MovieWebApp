@@ -9,14 +9,15 @@ button{
     height: fit-content;
     margin: auto;
     margin-right: 15px;
-    height: 60%;
+    height: 50%;
     color: #001449;
     background-color: #906090;
     border: 0;
 }
 button:hover{
-    height: 40%;
+    height: 65%;
     background-color: #dd77dd;
+    border-radius: 9px;
 }
 button:active{
     

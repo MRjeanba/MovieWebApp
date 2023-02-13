@@ -7,6 +7,7 @@ const MovieItem = (props) => {
         <li className={styles.movieItem}>
             <h2>{props.title}</h2>
             <h3>{props.duration}</h3>
+            <img src={props.img}/>
             <p>Users review : {props.review} / 5</p>
         </li>
     )
