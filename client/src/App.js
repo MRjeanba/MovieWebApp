@@ -1,18 +1,27 @@
 import Header from "./components/Layer/Header";
 import InfoPanel from "./components/Layer/InfoPanel";
-import Card from "./components/Movie/Card";
 import MovieItems from "./components/Movie/MovieItems";
+import AddFilmForm from "./components/UI/AddFilmForm";
+import { useState } from "react";
 
 function App() {
 
+  const [ isFormShown, setIsFormShown ] = useState(false);
+  
+  const showForm = () =>{
+    setIsFormShown(true);
+  };
+  const hideForm = () => {
+    setIsFormShown(false);
+  }
+  
   return (
     <>
-      <Header />
+      <Header showForm={showForm}/>
+      {isFormShown && <AddFilmForm hideForm={hideForm}/>}
       <InfoPanel />
-      
-      {/* <Card> */}
-        <MovieItems />
-      {/* </Card> */}
+
+      <MovieItems />
     </>
 
   );

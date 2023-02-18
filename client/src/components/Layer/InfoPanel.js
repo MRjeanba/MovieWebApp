@@ -1,3 +1,4 @@
+import SearchBar from '../UI/SearchBar';
 import styles from './InfoPanel.module.css';
 
 const InfoPanel = () => {
@@ -6,6 +7,7 @@ const InfoPanel = () => {
         <div className={styles.panel}>
             <h2 className={styles.text + " " +styles.title}>Hello Welcome to My Movie Website !</h2>
             <p className={styles.text}>On this website, you can add and review movies that you watched and share it to your friends !</p>
+            <SearchBar className={styles.searchInput}/>
         </div>  
     )
 };
