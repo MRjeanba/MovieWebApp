@@ -7,10 +7,7 @@ const Header = (props) => {
         <header>
             <h2>Movie Enjoyer</h2>
             
-            <div className={styles.headerDiv}>
-                <Button onClick={props.showForm}>+Add Movie</Button>
-                <p>Username</p>
-            </div>
+            <Button className={styles.button} onClick={props.showForm}>+Add Movie</Button>
             
         </header>
     )

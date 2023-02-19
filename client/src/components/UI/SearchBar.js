@@ -1,5 +1,8 @@
 
 
+
+// Should be able to "filter" the items with this component, so manage state that listen to key stroke
+// And display movie items that correspond to these key entered by the user 
 const SearchBar = (props) => {
     return (
         <>

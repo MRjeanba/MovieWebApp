@@ -22,11 +22,10 @@ div{
     min-height: 800px;
 }
 
-.no-movies{
-    position: absolute;
+.noMovies{
+    margin: auto;
     text-align: center;
-    margin: 35% auto;
-    font-size: 1.5em;
     color: rgb(255, 255, 255);
+    font-size: 1.6em;
 }
 

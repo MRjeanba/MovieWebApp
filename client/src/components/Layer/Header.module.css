@@ -4,24 +4,24 @@
 }
 
 header {
+    min-height: 70px;
     display: flex;
     color: white;
     width: 100%;
-    min-height: 7%;
     justify-content: space-between;
 }
 
 .headerDiv{
     display: flex;
     justify-content: space-between;
-    min-height: 42.5px;
+    min-height: 50px;
     height: 100%;
     width: 15%;
 }
 
 
-button{
-    min-height: 25px;
+.button{
+    min-height: 40px;
     border-radius: 8px;
     margin: auto;
     margin-right: 15px;
@@ -33,8 +33,9 @@ button{
     2px 4px 8px 0px rgba(255, 255, 255, 0.7),
     2px 4px 16px 0px rgba(255, 255, 255, 0.7);
 }
-button:hover{
-    height: 35px;
+.button:hover{
+    height: 55px;
+    width: 95px;
     background-color: #dd77dd;
     border-radius: 9px;
     box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
@@ -43,9 +44,10 @@ button:hover{
             2px 4px 16px 0px rgba(255, 255, 255, 0.7);
 }
 
-button:active{
+.button:active{
     
-    height: 30px;
+    height: 55px;
+    width: 95px;
     background-color: #dd77dd;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.7),
     1px 2px 4px 0px rgba(0, 0, 0, 0.7),
@@ -59,8 +61,8 @@ h2{
 }
 
 
-
+/* 
 div p {
     margin: auto;
     margin-right: 10px;
-}
+} */

@@ -8,15 +8,25 @@ const AddFilmForm = (props) => {
     // On the submission of the form, we want to make a get request to the api
     const submitFormHandler = (ev) => {
         ev.preventDefault();
-        alert('submitted!');
+
+        // create an object from the inputs
+        const movieToSearch = {
+            name: nameInput,
+            year: yearInput
+        };
+
+        //Make request to the API
+        
     };
 
     const [nameInput, setnameInput] = useState('');
     const [yearInput, setyearInput] = useState('');
 
+
     const nameInputChangeHandler = (ev) => {
         setnameInput(ev.target.value);
     }
+
     const yearInputChangeHandler = (ev) => {
 
         // some verification because if the user enter something then remove everything the app crash

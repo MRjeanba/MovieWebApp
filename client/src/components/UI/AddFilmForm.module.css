@@ -56,6 +56,40 @@ button{
     display: inline-block;
 }
 
+button{
+    min-height: 35px;
+    border-radius: 8px;
+    margin: auto;
+    margin-right: 15px;
+    color: #000000;
+    background-color: #db9ee2;
+    border: 0;
+    box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
+    1px 2px 4px 0px rgba(255, 255, 255, 0.7),
+    2px 4px 8px 0px rgba(255, 255, 255, 0.7),
+    2px 4px 16px 0px rgba(255, 255, 255, 0.7);
+}
+button:hover{
+    min-height: 39px;
+    width: 115px;
+    background-color: #dd77dd;
+    border-radius: 9px;
+    box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
+            1px 2px 4px 0px rgba(255, 255, 255, 0.7),
+            2px 4px 8px 0px rgba(255, 255, 255, 0.7),
+            2px 4px 16px 0px rgba(255, 255, 255, 0.7);
+}
+
+button:active{
+    height: 42px;
+    width: 70px;
+    background-color: #dd77dd;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.7),
+    1px 2px 4px 0px rgba(0, 0, 0, 0.7),
+    2px 4px 8px 0px rgba(0, 0, 0, 0.7),
+    2px 4px 16px 0px rgba(0, 0, 0, 0.7);
+}
+
 .disable{
     pointer-events: none;
     cursor: not-allowed;

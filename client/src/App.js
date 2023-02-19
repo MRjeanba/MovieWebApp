@@ -7,7 +7,8 @@ import { useState } from "react";
 function App() {
 
   const [ isFormShown, setIsFormShown ] = useState(false);
-  
+  const [ moviesStored, setMoviesStored ] = useState([]);
+
   const showForm = () =>{
     setIsFormShown(true);
   };
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
       <Header showForm={showForm}/>
-      {isFormShown && <AddFilmForm hideForm={hideForm}/>}
+      {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={setMoviesStored}/>}
       <InfoPanel />
 
       <MovieItems />
