@@ -28,7 +28,7 @@ function App() {
       {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie}/>}
       <InfoPanel />
 
-      <MovieItems />
+      <MovieItems moviesStored={moviesStored} />
     </>
 
   );

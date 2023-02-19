@@ -5,7 +5,9 @@ import Button from './Button';
 
 const AddFilmForm = (props) => {
 
-    const movieAPIUrl = 'https://api.themoviedb.org/3/search/movie?api_key=21eda9c4a3be1095cd8e45be84556064&query=';
+    // import the api key from the env file
+    const movieAPIUrl = 'https://api.themoviedb.org/3/search/movie?api_key=' + ApiKey + '&query=';
+    const imageUrl = "https://image.tmdb.org/t/p/w300/";
 
     // fetch movies from the TMDB API
     async function fetchMovies(EnteredName, enteredYear){
@@ -16,7 +18,7 @@ const AddFilmForm = (props) => {
         const newMovieItem = {
             title: movieData.results[0].original_title,
             overview: movieData.results[0].overview,
-            poster: movieData.results[0].poster_path,
+            poster: imageUrl + movieData.results[0].poster_path,
             release: movieData.results[0].release_date,
             review: movieData.results[0].vote_average,
         };
