@@ -14,12 +14,18 @@ function App() {
   };
   const hideForm = () => {
     setIsFormShown(false);
-  }
+  };
+
+  const addMovie = (movieObj) => {
+    setMoviesStored((prevState) => {
+      return [movieObj, ...prevState];
+    })
+  };
   
   return (
     <>
       <Header showForm={showForm}/>
-      {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={setMoviesStored}/>}
+      {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie}/>}
       <InfoPanel />
 
       <MovieItems />
