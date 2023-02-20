@@ -5,26 +5,14 @@ import Button from './Button';
 
 const AddFilmForm = (props) => {
 
-    // import the api key from the env file
-    const movieAPIUrl = 'https://api.themoviedb.org/3/search/movie?api_key=' + ApiKey + '&query=';
-    const imageUrl = "https://image.tmdb.org/t/p/w300/";
 
-    // fetch movies from the TMDB API
+    // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovies(EnteredName, enteredYear){
-        
-        // we build the url with the data entered by the user
-        const response = await fetch(movieAPIUrl + EnteredName + '&year=' + enteredYear);
-        const movieData = await response.json();
-        const newMovieItem = {
-            title: movieData.results[0].original_title,
-            overview: movieData.results[0].overview,
-            poster: imageUrl + movieData.results[0].poster_path,
-            release: movieData.results[0].release_date,
-            review: movieData.results[0].vote_average,
-        };
-        alert(newMovieItem);
 
-        props.addMovie(newMovieItem);
+        const response = await fetch('api/'+EnteredName+'/'+enteredYear);
+        const movieData = await response.json();
+
+        props.addMovie(movieData);
     }
 
     // On the submission of the form, we want to make a get request to the api
@@ -32,6 +20,7 @@ const AddFilmForm = (props) => {
         ev.preventDefault();
 
         fetchMovies(nameInput, yearInput);
+        props.hideForm();
     };
 
     const [nameInput, setnameInput] = useState('');
