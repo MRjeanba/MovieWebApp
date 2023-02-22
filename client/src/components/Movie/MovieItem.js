@@ -6,7 +6,7 @@ const MovieItem = (props) => {
     return (
         <li className={styles.movieItem}>
             <h2>{props.title}</h2>
-            <h3>{props.overview}</h3>
+            {/* <h3>{props.overview}</h3> */}
             <img src={props.img} className={styles.img}/>
             <p>Users review : {props.review} / 10</p>
         </li>
