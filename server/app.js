@@ -14,11 +14,13 @@ const app = express();
 app.use(bodyParser.json());
 
 // To be able to get data in req.body
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const apiKey = process.env.APIKEY;
 const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + apiKey + '&query=';
 const imageUrl = "https://image.tmdb.org/t/p/w300/";
+
+let newMovieItem = {};
 
 // When user makes a get request for a movie, we make the request to the API and send back the data
 app.get('/api/:movieName/:movieYear', (req, res) => {
@@ -29,15 +31,22 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
     console.log("Communication is working!");
 
     request(movieURL + movieName + '&year=' + movieYear, function (error, response, body) {
+
         if (error) {
             console.log('error:', error); // Print the error if one occurred and handle it
+            //We just put an error prop to the new Movie item and give informations to the user about the error
+            newMovieItem = { error: true };
+            res.send(JSON.stringify(newMovieItem));
+            return;
         }
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 
         // transform the string into an JS object
-        movieData = JSON.parse(body);
+        const movieData = JSON.parse(body);
 
-        const newMovieItem = {
+
+        newMovieItem = {
+            error: false,
             title: movieData.results[0].original_title,
             overview: movieData.results[0].overview,
             poster: imageUrl + movieData.results[0].poster_path,
@@ -46,12 +55,13 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
         };
 
         console.log(newMovieItem);
-        // Send back the new object to the front end
-        res.send(JSON.stringify(newMovieItem));
     });
+    // Send back the new object to the front end
+    res.send(JSON.stringify(newMovieItem));
+
 });
 
 
 app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+    console.log(`Server listening on ${PORT}`);
 });

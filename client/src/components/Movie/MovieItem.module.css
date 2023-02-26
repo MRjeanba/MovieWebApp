@@ -31,6 +31,6 @@
 
 .img{
   margin-top: 5px;
-  height: 70%;
-  width: 90%;
+  max-height: 70%;
+  min-width: 90%;
 }
