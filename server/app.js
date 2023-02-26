@@ -32,27 +32,34 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
 
     request(movieURL + movieName + '&year=' + movieYear, function (error, response, body) {
 
-        if (error) {
-            console.log('error:', error); // Print the error if one occurred and handle it
-            //We just put an error prop to the new Movie item and give informations to the user about the error
-            newMovieItem = { error: true };
-            res.send(JSON.stringify(newMovieItem));
-            return;
-        }
+        // if (error) {
+        //     //console.log('error:', error); // Print the error if one occurred and handle it
+        //     //We just put an error prop to the new Movie item and give informations to the user about the error
+        //     newMovieItem = { error: true };
+        //     res.send(JSON.stringify(newMovieItem));
+        //     return;
+        // }
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 
         // transform the string into an JS object
         const movieData = JSON.parse(body);
 
-
-        newMovieItem = {
-            error: false,
-            title: movieData.results[0].original_title,
-            overview: movieData.results[0].overview,
-            poster: imageUrl + movieData.results[0].poster_path,
-            release: movieData.results[0].release_date,
-            review: movieData.results[0].vote_average,
-        };
+        try {
+            newMovieItem = {
+                error: false,
+                title: movieData.results[0].original_title,
+                overview: movieData.results[0].overview,
+                poster: imageUrl + movieData.results[0].poster_path,
+                release: movieData.results[0].release_date,
+                review: movieData.results[0].vote_average,
+            };
+        } catch (error) {
+            console.log('error:', error); // Print the error if one occurred and handle it
+            //We just put an error prop to the new Movie item and give informations to the user about the error
+            newMovieItem = { error: true };
+            // res.send(JSON.stringify(newMovieItem));
+            // return;
+        }
 
         console.log(newMovieItem);
     });

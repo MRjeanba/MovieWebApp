@@ -5,31 +5,23 @@ import Button from './Button';
 
 const AddFilmForm = (props) => {
 
+    const [fetchError, setFetchError] = useState(false);
+    const [nameInput, setnameInput] = useState('');
+    const [yearInput, setyearInput] = useState('');
+
+    let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
 
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovies(EnteredName, enteredYear){
 
         const response = await fetch('api/'+EnteredName+'/'+enteredYear);
         const movieData = await response.json();
-
-        props.addMovie(movieData);
-    }
-
-    // On the submission of the form, we want to make a get request to the api
-    const submitFormHandler = (ev) => {
-        ev.preventDefault();
-
-        fetchMovies(nameInput, yearInput);
-        props.hideForm();
+        return movieData;
     };
-
-    const [nameInput, setnameInput] = useState('');
-    const [yearInput, setyearInput] = useState('');
-
 
     const nameInputChangeHandler = (ev) => {
         setnameInput(ev.target.value);
-    }
+    };
 
     const yearInputChangeHandler = (ev) => {
 
@@ -39,8 +31,29 @@ const AddFilmForm = (props) => {
         } else{
             setyearInput(ev.target.value);
         }
-    }
+    };
 
+    // On the submission of the form, we want to make a get request to the api
+    const submitFormHandler = async(ev) => {
+        ev.preventDefault();
+
+        const movie = await fetchMovies(nameInput, yearInput);
+        console.log(nameInput);
+        if (movie.error) {
+            setFetchError(true);
+            setnameInput('');
+            setyearInput('');
+            return;
+        }
+        else {
+            setFetchError(false);
+            setnameInput('');
+            setyearInput('');
+            // no error, we just hide the form
+            props.hideForm();
+            props.addMovie(movie);
+        }
+    };
 
     // Determine the form validity and control the submit button in order to not get empty or inchoherent inputs
     const formIsInvalid = nameInput.trim().length === 0 || parseInt(yearInput) <= 1895 || yearInput.trim().length === 0;
@@ -55,11 +68,12 @@ const AddFilmForm = (props) => {
                 <h3>Please enter informations about the film you want to add</h3>
                 <form className={classes.addMovie} onSubmit={submitFormHandler}>
                     <label htmlFor='movieName'>Name of the movie:</label>
-                    <input type='text' name='movieName' onChange={nameInputChangeHandler}></input>
+                    <input type='text' name='movieName' onChange={nameInputChangeHandler} value={nameInput}></input>
                     <label htmlFor='movieYear'>Year of publication:</label>
-                    <input type='number' name='movieYear' onChange={yearInputChangeHandler}></input>
+                    <input type='number' name='movieYear' onChange={yearInputChangeHandler} value={yearInput}></input>
                     <Button onClick={props.hideForm}>Cancel</Button> 
-                    <Button className={formIsInvalid && classes.disable}>Add this movie</Button>
+                    <Button className={formIsInvalid ? classes.disable : undefined}>Add this movie</Button>
+                    {fetchError && errorMessage}
                 </form>
             </div>
         </>

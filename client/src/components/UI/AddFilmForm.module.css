@@ -98,3 +98,10 @@ button:active{
     -webkit-box-shadow: none;
     box-shadow: none;  
 }
+
+.errorFetch{
+    margin-top: 4%;
+    color: red;
+    font-size: large;
+    font-weight: bold;
+}

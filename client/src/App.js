@@ -17,9 +17,11 @@ function App() {
   };
 
   const addMovie = (movieObj) => {
+    
     setMoviesStored((prevState) => {
       return [movieObj, ...prevState];
-    })
+    });
+
   };
   
   return (
