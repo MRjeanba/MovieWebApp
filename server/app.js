@@ -60,11 +60,11 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
             // res.send(JSON.stringify(newMovieItem));
             // return;
         }
-
         console.log(newMovieItem);
+
+        // Send back the new object to the front end
+        res.send(JSON.stringify(newMovieItem));
     });
-    // Send back the new object to the front end
-    res.send(JSON.stringify(newMovieItem));
 
 });
 

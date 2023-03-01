@@ -38,7 +38,7 @@ const AddFilmForm = (props) => {
         ev.preventDefault();
 
         const movie = await fetchMovies(nameInput, yearInput);
-        console.log(nameInput);
+        console.log(movie);
         if (movie.error) {
             setFetchError(true);
             setnameInput('');
