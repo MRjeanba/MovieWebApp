@@ -43,10 +43,11 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
 
         // transform the string into an JS object
         const movieData = JSON.parse(body);
-
+        console.log(movieData);
         try {
             newMovieItem = {
                 error: false,
+                id: movieData.results[0].id,
                 title: movieData.results[0].original_title,
                 overview: movieData.results[0].overview,
                 poster: imageUrl + movieData.results[0].poster_path,
