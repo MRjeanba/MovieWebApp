@@ -9,6 +9,3 @@ MongoDB. I will also learn how to communicate with API's since in this project, 
 # How to run the project:
 For the moment the project is in development
 
-# Actual images of the project:
-image.png
-image.png
