@@ -1,13 +1,14 @@
 # MovieWebApp
 This project will be at the end a web application in which you can register and add watched movies, you will also be able to rate these movies and commpare your
-rating with ratings from the IMDB website.
-This website will be used by group of users and they can by this website share watched films and recommend them.
-
+rating with ratings from thousands of users. This website is done to be used by groups of friends that want to share movies they watched and also provide ratings to their friends.
 
 # Technologies
-Other than make an interesting project for me, this project will help me to familiarize myself with React, but also back end technologies such as Node.JS and 
-MongoDB. I will also learn how to communicate with API's since in this project, I will be using the IMDB api to add new movies to the app and to retrieve reviews from IMDB.
+Other than making an interesting project for me, this project will help me to familiarize myself with React, but also back end technologies such as Node.JS and 
+MongoDB. I will also learn how to communicate with API's since in this project, I will be using the TMDB API to retrieve data on the movies.
 
-# TO DO:
+# How to run the project:
+For the moment the project is in development
 
-continue on the states created in MovieItems, find an API to add movies and a way to add movies, check the Notion doc for more infos
+# Actual images of the project:
+image.png
+image.png
