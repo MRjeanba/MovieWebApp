@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import LoadingSpinner from '../UX/LoadingSpinner';
 import classes from './AddFilmForm.module.css';
 import Button from './Button';
 
@@ -8,14 +9,16 @@ const AddFilmForm = (props) => {
     const [fetchError, setFetchError] = useState(false);
     const [nameInput, setnameInput] = useState('');
     const [yearInput, setyearInput] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
 
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovies(EnteredName, enteredYear){
-
-        const response = await fetch('api/'+EnteredName+'/'+enteredYear);
+        const response = await fetch('api/' + EnteredName + '/' + enteredYear);
         const movieData = await response.json();
+        setIsLoading(false);
+
         return movieData;
     };
 
@@ -35,10 +38,12 @@ const AddFilmForm = (props) => {
 
     // On the submission of the form, we want to make a get request to the api
     const submitFormHandler = async(ev) => {
+        setIsLoading(true);
         ev.preventDefault();
 
         const movie = await fetchMovies(nameInput, yearInput);
         console.log(movie);
+
         if (movie.error) {
             setFetchError(true);
             setnameInput('');
@@ -74,6 +79,7 @@ const AddFilmForm = (props) => {
                     <Button onClick={props.hideForm}>Cancel</Button> 
                     <Button className={formIsInvalid ? classes.disable : undefined}>Add this movie</Button>
                     {fetchError && errorMessage}
+                    {isLoading && <LoadingSpinner />}
                 </form>
             </div>
         </>
