@@ -36,7 +36,7 @@ const Movie = mongoose.model("Movie", movieSchema);
 
 const apiKey = process.env.APIKEY;
 const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + apiKey + '&query=';
-const imageUrl = "https://image.tmdb.org/t/p/w300/";
+const imageUrl = "https://image.tmdb.org/t/p/w400/";
 
 let newMovieItem = {};
 
