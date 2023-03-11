@@ -6,11 +6,12 @@ import Button from './Button';
 
 const AddFilmForm = (props) => {
 
-    const [fetchError, setFetchError] = useState(false);
+    const [fetchError, setFetchError] = useState(null);
     const [nameInput, setnameInput] = useState('');
     const [yearInput, setyearInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    
     let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
 
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
@@ -18,7 +19,7 @@ const AddFilmForm = (props) => {
         const response = await fetch('api/' + EnteredName + '/' + enteredYear);
         const movieData = await response.json();
         setIsLoading(false);
-
+        
         return movieData;
     };
 
@@ -45,13 +46,16 @@ const AddFilmForm = (props) => {
         console.log(movie);
 
         if (movie.error) {
-            setFetchError(true);
+            if(movie.message){
+                console.log(movie.message);
+                setFetchError(movie.message);
+            }
             setnameInput('');
             setyearInput('');
             return;
         }
         else {
-            setFetchError(false);
+            setFetchError(null);
             setnameInput('');
             setyearInput('');
             // no error, we just hide the form
@@ -78,8 +82,8 @@ const AddFilmForm = (props) => {
                     <input type='number' name='movieYear' onChange={yearInputChangeHandler} value={yearInput}></input>
                     <Button onClick={props.hideForm}>Cancel</Button> 
                     <Button className={formIsInvalid ? classes.disable : undefined}>Add this movie</Button>
-                    {fetchError && errorMessage}
-                    {isLoading && <LoadingSpinner />}
+                    {fetchError && <p className={classes.errorFetch}>{fetchError}</p>}
+                    {isLoading && <LoadingSpinner text="Adding your movie..." />}
                 </form>
             </div>
         </>

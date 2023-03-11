@@ -48,7 +48,7 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
 
     console.log("Communication is working!");
 
-    request(movieURL + movieName + '&year=' + movieYear, function (error, response, body) {
+    request(movieURL + movieName + '&year=' + movieYear, async function (error, response, body) {
 
         // if (error) {
         //     //console.log('error:', error); // Print the error if one occurred and handle it
@@ -60,9 +60,19 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 
         // transform the string into an JS object
-        const movieData = JSON.parse(body);
-        console.log(movieData);
+        const movieData = await JSON.parse(body);
+        
         try {
+            
+            // If we enter here, it means that the fetch was unsuccessful so we can warn the user accordingly
+            if(movieData.results.length === 0){
+                throw new Error("We couldn't find the movie you are trying to add...");
+            }
+            // if the movie that we want to add already exist, then we throw an error and prevent the user
+            if(await findMovieById(movieData.results[0].id)){
+                throw new Error("This movie is already added...");
+            }
+
             newMovieItem = {
                 error: false,
                 id: movieData.results[0].id,
@@ -72,12 +82,11 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
                 release: movieData.results[0].release_date,
                 review: movieData.results[0].vote_average,
             };
+
         } catch (error) {
             console.log('error:', error); // Print the error if one occurred and handle it
             //We just put an error prop to the new Movie item and give informations to the user about the error
-            newMovieItem = { error: true };
-            // res.send(JSON.stringify(newMovieItem));
-            // return;
+            newMovieItem = { error: true, message: error.message };
         }
         console.log(newMovieItem);
         // Check, if the error is not null, then we fetched an exisitng object
@@ -96,6 +105,41 @@ app.get('/api/:movieName/:movieYear', (req, res) => {
     });
 
 });
+
+// Route responsible to fetch and send back the mongoDB data of the stored movies
+app.get('/api/storedMovies', async (req,res) => {
+
+    let storedMovies = [];
+    try {
+        const dataM = await Movie.find({ });
+        console.log(dataM);
+        storedMovies = [...dataM]
+        console.log(storedMovies);
+    } catch (error) {
+        console.log(error);
+        storedMovies = { error: true, errMessage: error };
+    }
+
+    // Send back the stored objects to the front end
+    res.send(JSON.stringify(storedMovies));
+});
+
+
+/**
+ * *******Helper methods for Database operations***********
+ * 
+ */
+
+// Check in the database if a movie with the corresponding ID exists
+const findMovieById = async (givenId) => {
+
+    const movie = await Movie.find({id: givenId});
+    if(movie.length === 0){
+        return false;
+    }
+    console.log("here");
+    return movie;
+}
 
 
 app.listen(PORT, () => {

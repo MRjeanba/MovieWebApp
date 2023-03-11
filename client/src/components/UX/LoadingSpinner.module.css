@@ -1,3 +1,11 @@
+
+.message {
+  font-weight: bolder;
+  color: white;
+  text-align: center;
+  margin-top: 3%;
+}
+
 .loader {
     width: 48px;
     height: 48px;
@@ -18,4 +26,4 @@
     100% {
       transform: rotate(360deg);
     }
-  } 
+  };
