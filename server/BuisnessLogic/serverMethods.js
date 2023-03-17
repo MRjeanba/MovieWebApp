@@ -54,13 +54,6 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
     console.log("is this data ??? ");
 };
 
-
-function setMovieData(emptyMovie, data){
-
-    emptyMovie = {...data};
-    return emptyMovie;
-}
-
 /**
  * 
  * @param {*Object The movie object that we want to store in our database} movieData 
