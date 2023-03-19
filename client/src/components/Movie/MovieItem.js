@@ -20,7 +20,9 @@ const MovieItem = (props) => {
         <li className={styles.movieItem} key={props.id} onClick={bringUpMovieData}>
             <h2>{props.title}</h2>
             <img src={props.img} className={styles.img} alt="Oops... you should see an image of the movie. Sorry!" />
-            <p>Users review: {review}/10</p>
+            <p> <span className={"fa fa-star " + styles.checked} style={{ fontSize: '28px' }}></span>
+                 {" "+ review}/10
+            </p>
         </li>
     )
 };

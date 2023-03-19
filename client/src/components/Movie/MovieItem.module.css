@@ -15,7 +15,9 @@
 .movieItem:hover{
   opacity: 0.6;
 }
-
+.checked {
+  color: orange;
+}
 
 .movieItem h2 {
   font-size: 2rem;
