@@ -1,11 +1,11 @@
 .modal {
     border-radius: 9px;
-    top: 20vh;
+    top: 105;
     position: fixed;
-    left: 30%;
+    left: 15%;
     bottom: 10%;
-    width: 40%;
-    height: 50%;
+    width: 70%;
+    height: 80%;
     z-index: 100;
     overflow: hidden;
     text-align: center;
@@ -16,4 +16,19 @@
     2px 4px 8px 0px rgba(0, 0, 0, 0.7),
     2px 4px 16px 0px rgba(0, 0, 0, 0.7);
     animation: slide-down 300ms ease-out forwards;
+    display: flex;
+}
+.container1{
+height: 100%;
+
+}
+.container2{
+    height: 100%;
+}
+.imgDetails{
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 7px;
 }

@@ -11,7 +11,7 @@ function App() {
   const [ isFormShown, setIsFormShown ] = useState(false);
   const [ moviesStored, setMoviesStored ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ isMovieShown, setShowMovie ] = useState(null);
+  const [ movieDetails, setMovieDetails ] = useState(null);
 
   const showForm = () =>{
     setIsFormShown(true);
@@ -20,7 +20,7 @@ function App() {
     setIsFormShown(false);
   };
   const displayMovieData = (movieObject) => {
-    setShowMovie(movieObject);
+    setMovieDetails(movieObject);
   };
 
   const addMovie = (movieObj) => {
@@ -54,7 +54,7 @@ function App() {
       <InfoPanel />
       {isLoading && <LoadingSpinner text="Retrieving your movies..."/>}
       <MovieItems moviesStored={moviesStored} displayMovie={displayMovieData}/>
-      {isMovieShown != null && <MovieDetails displayMovieData={displayMovieData}/>}
+      {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails}/>}
     </>
 
   );
