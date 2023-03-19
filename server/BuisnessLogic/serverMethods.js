@@ -59,8 +59,7 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
  * @param {*Object The movie object that we want to store in our database} movieData 
  */
 async function storeMovie(movieData) {
-
-    //The following code should not be in the fetch code - try to follow SRP principle!!!
+    
     // Check, if the error is not null, then we fetched an exisitng object
     // So we can store it in our database
     if (!movieData.error) {

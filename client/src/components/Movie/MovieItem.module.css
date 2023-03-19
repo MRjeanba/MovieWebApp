@@ -12,6 +12,9 @@
   flex-basis: 29%;
   max-height: 500px;
 }
+.movieItem:hover{
+  opacity: 0.6;
+}
 
 
 .movieItem h2 {

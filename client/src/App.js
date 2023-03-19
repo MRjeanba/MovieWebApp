@@ -9,13 +9,17 @@ function App() {
 
   const [ isFormShown, setIsFormShown ] = useState(false);
   const [ moviesStored, setMoviesStored ] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ isMovieShown, setShowMovie ] = useState(null);
 
   const showForm = () =>{
     setIsFormShown(true);
   };
   const hideForm = () => {
     setIsFormShown(false);
+  };
+  const displayMovieData = (movieObject) => {
+    setShowMovie(movieObject);
   };
 
   const addMovie = (movieObj) => {
@@ -48,7 +52,7 @@ function App() {
       {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie}/>}
       <InfoPanel />
       {isLoading && <LoadingSpinner text="Retrieving your movies..."/>}
-      <MovieItems moviesStored={moviesStored} />
+      <MovieItems moviesStored={moviesStored} displayMovie={displayMovieData}/>
     </>
 
   );
