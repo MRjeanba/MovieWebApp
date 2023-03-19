@@ -4,18 +4,23 @@ import MovieItems from "./components/Movie/MovieItems";
 import AddFilmForm from "./components/UI/AddFilmForm";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "./components/UX/LoadingSpinner";
+import MovieDetails from "./components/UI/MovieDetails";
 
 function App() {
 
   const [ isFormShown, setIsFormShown ] = useState(false);
   const [ moviesStored, setMoviesStored ] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ movieDetails, setMovieDetails ] = useState(null);
 
   const showForm = () =>{
     setIsFormShown(true);
   };
   const hideForm = () => {
     setIsFormShown(false);
+  };
+  const displayMovieData = (movieObject) => {
+    setMovieDetails(movieObject);
   };
 
   const addMovie = (movieObj) => {
@@ -48,7 +53,8 @@ function App() {
       {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie}/>}
       <InfoPanel />
       {isLoading && <LoadingSpinner text="Retrieving your movies..."/>}
-      <MovieItems moviesStored={moviesStored} />
+      <MovieItems moviesStored={moviesStored} displayMovie={displayMovieData}/>
+      {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails}/>}
     </>
 
   );

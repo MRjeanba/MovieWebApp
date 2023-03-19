@@ -38,7 +38,7 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
                 overview: movieData.results[0].overview,
                 poster: imageUrl + movieData.results[0].poster_path,
                 release: movieData.results[0].release_date,
-                review: movieData.results[0].vote_average,
+                review: parseFloat(movieData.results[0].vote_average).toFixed(1),
             };
             console.log(newMovieItem);
             callback(newMovieItem);
@@ -60,7 +60,6 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
  */
 async function storeMovie(movieData) {
 
-    //The following code should not be in the fetch code - try to follow SRP principle!!!
     // Check, if the error is not null, then we fetched an exisitng object
     // So we can store it in our database
     if (!movieData.error) {
