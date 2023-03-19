@@ -19,7 +19,6 @@ const MovieItem = (props) => {
     return (
         <li className={styles.movieItem} key={props.id} onClick={bringUpMovieData}>
             <h2>{props.title}</h2>
-            {/* <h3>{props.overview}</h3> */}
             <img src={props.img} className={styles.img} alt="Oops... you should see an image of the movie. Sorry!" />
             <p>Users review: {review}/10</p>
         </li>
