@@ -4,6 +4,7 @@ import MovieItems from "./components/Movie/MovieItems";
 import AddFilmForm from "./components/UI/AddFilmForm";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "./components/UX/LoadingSpinner";
+import MovieDetails from "./components/UI/MovieDetails";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
       <InfoPanel />
       {isLoading && <LoadingSpinner text="Retrieving your movies..."/>}
       <MovieItems moviesStored={moviesStored} displayMovie={displayMovieData}/>
+      {isMovieShown != null && <MovieDetails displayMovieData={displayMovieData}/>}
     </>
 
   );

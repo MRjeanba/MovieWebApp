@@ -90,5 +90,5 @@ const AddFilmForm = (props) => {
 
     )
 
-}
+};
 export default AddFilmForm;
