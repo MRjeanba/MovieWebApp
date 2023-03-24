@@ -1,4 +1,5 @@
 import BackDrop from '../UX/BackDrop';
+import KebabMenuIcon from '../UX/KebabMenuIcon';
 import classes from './MovieDetails.module.css';
 
 const MovieDetails = (props) => {
@@ -16,7 +17,6 @@ const MovieDetails = (props) => {
     let imgUrl = props.details.img;
     imgUrl = imgUrl.replace('w400','w500');
 
-    //TODO: Use the movie details inside the props.details to display movie information!!
     return (
         <>
             <BackDrop backdropHandler={hideDetails} />
@@ -27,6 +27,7 @@ const MovieDetails = (props) => {
                     <p className={classes.rating}>{movieObject.review}</p>
                 </div>
                 <div className={classes.container2}>
+                    <KebabMenuIcon />
                     <h1 className={classes.title}>{movieObject.title}</h1>
                     <p className={classes.overview}>{movieObject.overview}</p>
                 </div>

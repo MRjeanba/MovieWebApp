@@ -1,0 +1,7 @@
+.kebabIcon {
+    float: right;
+    width: 33px;
+    height: 33px;
+    background-image: radial-gradient(circle, rgb(255, 255, 255) 3.3px, transparent 3.7px);
+    background-size: 100% 33.33%;
+}
