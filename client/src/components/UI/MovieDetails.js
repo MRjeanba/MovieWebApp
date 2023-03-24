@@ -27,7 +27,7 @@ const MovieDetails = (props) => {
                     <p className={classes.rating}>{movieObject.review}</p>
                 </div>
                 <div className={classes.container2}>
-                    <KebabMenuIcon />
+                    <KebabMenuIcon items={["Delete","Update"]}/>
                     <h1 className={classes.title}>{movieObject.title}</h1>
                     <p className={classes.overview}>{movieObject.overview}</p>
                 </div>

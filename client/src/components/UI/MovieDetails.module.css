@@ -18,8 +18,9 @@
     animation: slide-down 300ms ease-out forwards;
     display: flex;
 }
-.container1{
-height: 100%;
+.container1 {
+    height: 100%;
+    width: 100%;
 
 }
 .title{
@@ -39,13 +40,14 @@ height: 100%;
 .rating {
     font-size: larger;
 }
-.container2{
+.container2 {
     height: 100%;
+    width: 100%;
 }
 .imgDetails{
+    margin: auto;
     width: 80%;
     height: 80%;
-    margin: auto;
     margin-top: 10%;
     border-radius: 7px;
 }
