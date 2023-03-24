@@ -27,3 +27,13 @@
         transform: translateY(0);
     }
 }
+.title{
+    margin-top: 1%;
+}
+.outcomes{
+    margin-top: 4%;
+}
+.modalButton{
+    margin-top: 10%;
+    
+}
