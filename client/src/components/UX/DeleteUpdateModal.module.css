@@ -1,11 +1,11 @@
 .modal {
     border-radius: 9px;
-    top: 105;
+    top: 30%;
     position: fixed;
-    left: 15%;
+    left: 32.5%;
     bottom: 10%;
-    width: 70%;
-    height: 80%;
+    width: 35%;
+    height: 25%;
     z-index: 100;
     overflow: hidden;
     text-align: center;
@@ -16,5 +16,14 @@
     2px 4px 8px 0px rgba(0, 0, 0, 0.7),
     2px 4px 16px 0px rgba(0, 0, 0, 0.7);
     animation: slide-down 300ms ease-out forwards;
-    display: flex;
+}
+@keyframes slide-down{
+    from {
+        opacity: 0;
+        transform: translateY(-3rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
