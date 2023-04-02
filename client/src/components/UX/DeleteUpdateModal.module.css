@@ -5,9 +5,8 @@
     left: 32.5%;
     bottom: 10%;
     width: 35%;
-    height: 25%;
+    height: fit-content;
     z-index: 100;
-    overflow: hidden;
     text-align: center;
     color: white;
     background-color: #002D62;
@@ -17,6 +16,7 @@
     2px 4px 16px 0px rgba(0, 0, 0, 0.7);
     animation: slide-down 300ms ease-out forwards;
 }
+
 @keyframes slide-down{
     from {
         opacity: 0;
@@ -31,9 +31,24 @@
     margin-top: 1%;
 }
 .outcomes{
+    margin: auto;
     margin-top: 4%;
+    line-height: 1.6;
+    /* margin-left: 3%;
+    margin-right: 3%;
+     */
+     width: 80%;
+
+}
+.errorUpdate{
+    color: red;
+    font-weight: bolder;
+}
+.update {
+    margin-top: 5%;
+    font-weight: bolder;
 }
 .modalButton{
-    margin-top: 10%;
-    
+    margin-top: 5%;
+    margin-bottom: 2%;
 }

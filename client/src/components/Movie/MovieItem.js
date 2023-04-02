@@ -1,16 +1,18 @@
 import styles from './MovieItem.module.css';
 
 const MovieItem = (props) => {
-
     const review = parseFloat(props.review).toFixed(1);
 
-    // We need to bring up the movie data, but also set the state of display movie to true
+
+
+    // We need to bring up the movie data
     const bringUpMovieData = () => {
         const movie = {
             title: props.title,
             img: props.img,
             overview: props.overview,
             review: props.review,
+            id: props.id
         };
         props.displayMovie(movie);
     };

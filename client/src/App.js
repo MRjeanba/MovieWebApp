@@ -12,7 +12,6 @@ function App() {
   const [ moviesStored, setMoviesStored ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ movieDetails, setMovieDetails ] = useState(null);
-
   const showForm = () =>{
     setIsFormShown(true);
   };

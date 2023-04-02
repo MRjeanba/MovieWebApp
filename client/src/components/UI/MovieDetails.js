@@ -6,13 +6,12 @@ const MovieDetails = (props) => {
 
     // To make it easier to type, we extract all the properties of the object in props to a variable here
     const movieObject = {...props.details};
-
-
     // to make disappears the backdrop and the modal on click
     const hideDetails = () => {
         props.displayMovieData(null);
     };
-    
+
+
     // Transform movie link for img since in this modal we can make the movie image larger
     let imgUrl = props.details.img;
     imgUrl = imgUrl.replace('w400','w500');
@@ -27,7 +26,7 @@ const MovieDetails = (props) => {
                     <p className={classes.rating}>{movieObject.review}</p>
                 </div>
                 <div className={classes.container2}>
-                    <KebabMenuIcon items={["Delete","Update"]}/>
+                    <KebabMenuIcon items={["Delete","Update"]} movieId={movieObject.id} hideMovieDetails={hideDetails}/>
                     <h1 className={classes.title}>{movieObject.title}</h1>
                     <p className={classes.overview}>{movieObject.overview}</p>
                 </div>

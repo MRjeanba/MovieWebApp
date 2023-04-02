@@ -6,7 +6,6 @@ const KebabMenuIcon = (props) => {
     // responsible to show the list given to the kebab menu
     const [showList, setShowList] = useState(false);
     const [showModal, setShowModal] = useState(false);
-
     const hideModal = () => {
         setShowModal(false);
     };
@@ -51,7 +50,7 @@ const KebabMenuIcon = (props) => {
             <div className={classes.kebabIcon} onClick={onClickHandler}>
             </div>
             {showList && itemsInList}
-            {showModal && <DeleteUpdateModal modalHandler={hideModal}/>}
+            {showModal && <DeleteUpdateModal hideMovieDetails={props.hideMovieDetails} hideModal={hideModal} actionType={state} movieId={props.movieId}/>}
         </>
 
 
