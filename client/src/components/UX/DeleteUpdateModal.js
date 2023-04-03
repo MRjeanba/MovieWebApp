@@ -18,31 +18,27 @@ async function deleteFetchCall(movieId){
     return callResponse;
 }
 
-
+// TODO: We need to make two delete before deleting a movie...  find a way to improve this
 const DeleteUpdateModal = (props) => {
 
     let outcomesText = '';
     const [isLoading, setIsLoading] = useState(false);
-    const [updateMessage, setUpdateMessage] = useState(undefined);
-    const [hasError, setHasError] = useState(false);
+    const [hasError, setHasError] = useState(undefined);
 
     const onProceedHandler = async () => {
         console.log(props.movieId);
         setIsLoading(true);
         const response = await deleteFetchCall(props.movieId);
-        // Now that we get the response fron the backend, we need to write a message to the user, close the modals and refetch the movies on the home page
         console.log(response);
         if(!response.error){
-            setUpdateMessage('We are deleting your movie...');
             setTimeout(()=>{
-                setHasError(false);
+                setHasError(undefined);
                 setIsLoading(false);
                 props.hideModal();
                 props.hideMovieDetails();
             },1500);
         } else{
-            setUpdateMessage(response.message);
-            setHasError(true);
+            setHasError(response);
         }
         
 
@@ -71,11 +67,11 @@ const DeleteUpdateModal = (props) => {
             <BackDrop backdropHandler={props.modalHandler}/>
             <div className={classes.modal}>
                 <h2 className={classes.title}>Are you sure that you want to {props.actionType.method}?</h2>
-                {/* <p className={classes.outcomes}>The possible outcomes of the action</p> */}
                 {outcomesText}
-                <p className={hasError ? classes.errorUpdate : classes.update}>{updateMessage}</p>
                 <button className={classes.modalButton} onClick={onProceedHandler}>Proceed</button>
                 <button className={classes.modalButton} onClick={props.modalHandler}>Cancel</button>
+                {isLoading && <p className={classes.update}>Deleting your movie...</p>}
+                {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
                 {isLoading && <LoadinSpinner />}
             </div>
         </>

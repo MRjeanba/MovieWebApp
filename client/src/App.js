@@ -5,7 +5,7 @@ import AddFilmForm from "./components/UI/AddFilmForm";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "./components/UX/LoadingSpinner";
 import MovieDetails from "./components/UI/MovieDetails";
-
+import MoviesProvider from './Provider/MoviesProvider';
 function App() {
 
   const [ isFormShown, setIsFormShown ] = useState(false);
@@ -48,12 +48,14 @@ function App() {
   
   return (
     <>
+    <MoviesProvider>
       <Header showForm={showForm}/>
       {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie}/>}
       <InfoPanel />
       {isLoading && <LoadingSpinner text="Retrieving your movies..."/>}
-      <MovieItems moviesStored={moviesStored} displayMovie={displayMovieData}/>
+      <MovieItems displayMovie={displayMovieData}/>
       {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails}/>}
+      </MoviesProvider>
     </>
 
   );
