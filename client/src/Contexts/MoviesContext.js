@@ -3,8 +3,8 @@ import React from "react";
 
 const MoviesContext = React.createContext({ 
     movies: [{}],
-    addMovie: (item) => {},
-    removeMovie: (id) => {}
+    addMovie: () => {},
+    removeMovie: () => {}
 });
 
 export default MoviesContext;

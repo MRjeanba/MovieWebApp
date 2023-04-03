@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import BackDrop from './BackDrop';
 import classes from './DeleteUpdateModal.module.css';
 import LoadinSpinner from '../UX/LoadingSpinner';
+import MoviesContext from '../../Contexts/MoviesContext';
 
 async function deleteFetchCall(movieId){
 
-    const test = {name: 'JB'};
     const response = await fetch('api/delete',{
         method: 'POST',
         headers:{
@@ -20,7 +20,7 @@ async function deleteFetchCall(movieId){
 
 // TODO: We need to make two delete before deleting a movie...  find a way to improve this
 const DeleteUpdateModal = (props) => {
-
+    const moviesContext = useContext(MoviesContext);
     let outcomesText = '';
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(undefined);
@@ -36,6 +36,7 @@ const DeleteUpdateModal = (props) => {
                 setIsLoading(false);
                 props.hideModal();
                 props.hideMovieDetails();
+                moviesContext.removeItem(props.movieId);
             },1500);
         } else{
             setHasError(response);

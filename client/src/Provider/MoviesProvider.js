@@ -26,12 +26,16 @@ const MoviesProvider = (props) => {
     function reducer(state, action) {
         if (action.type === 'ADD') {
             return {
-                movies : [...state.movies, action.movie]
+                movies : [...state.movies, action.movie],
+                addMovie,
+                removeMovie,
             };
         }
         else if (action.type === 'REMOVE'){
             return {
-                movies: [...state.movies]
+                movies: state.movies.filter(item => item._id !== action.id),
+                addMovie,
+                removeMovie,
             };
         }
 
