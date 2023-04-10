@@ -59,6 +59,15 @@ app.get('/api/storedMovies', async (req,res) => {
     res.send(JSON.stringify(storedMovies));
 });
 
+// Route responsible to handle delete call on a particular movie ID
+app.post('/api/delete', async (req,res) => {
+
+    const movieId = req.body.id;
+    console.log(movieId);
+    const queryResult = await serverMethods.deleteMovie(movieId);
+    res.send(JSON.stringify(queryResult));
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
