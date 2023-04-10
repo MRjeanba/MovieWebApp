@@ -36,7 +36,7 @@ const DeleteUpdateModal = (props) => {
                 setIsLoading(false);
                 props.hideModal();
                 props.hideMovieDetails();
-                moviesContext.removeItem(props.movieId);
+                moviesContext.removeMovie(props.movieId);
             },1500);
         } else{
             setHasError(response);

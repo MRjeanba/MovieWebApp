@@ -3,7 +3,7 @@ import styles from './MovieItem.module.css';
 const MovieItem = (props) => {
     const review = parseFloat(props.movie.review).toFixed(1);
 
-
+    console.log('from movieItem component'+props.movie);
 
     // We need to bring up the movie data
     const bringUpMovieData = () => {

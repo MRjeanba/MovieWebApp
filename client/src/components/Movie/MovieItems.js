@@ -9,7 +9,7 @@ import MoviesContext from '../../Contexts/MoviesContext';
 
 const MovieItems = (props) => {
     const ctx = useContext(MoviesContext);
-    console.log(ctx);
+    console.log(ctx.movies[0]);
     
     const noMoviesMessage = <p className={styles.noMovies}>You have no movies yet, hit the add movie button !</p>;
     const moviesAvailable = <div>

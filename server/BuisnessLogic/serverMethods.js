@@ -34,6 +34,7 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
 
             newMovieItem = {
                 error: false,
+                _id: new mongoose.Types.ObjectId(),
                 id: movieData.results[0].id,
                 title: movieData.results[0].original_title,
                 overview: movieData.results[0].overview,
@@ -52,7 +53,6 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
             callback(newMovieItem);
         }
     });
-    console.log("is this data ??? ");
 };
 
 /**
@@ -70,7 +70,7 @@ async function storeMovie(movieData) {
         });
         delete movieToInsert.error; // the error prop is not defined in the schema so we get rid of it
         await movieToInsert.save();
-        return movieData; // we return the actual movie is successfully stored
+        return movieData; // we return the actual movie if successfully stored
     }
     // we return false if we encountered an error when saving the movie
     return {error: true, message: "We encountered a problem while trying to save your movie..."};

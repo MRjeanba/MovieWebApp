@@ -18,7 +18,7 @@ const MoviesProvider = (props) => {
     const moviesContext = { 
         movies: fetchMovies(),
         addMovie: addMovie,
-        removeItem: removeMovie
+        removeMovie: removeMovie
     };
 
     const [state, dispatchMoviesAction] = useReducer(reducer, moviesContext);
@@ -26,7 +26,7 @@ const MoviesProvider = (props) => {
     function reducer(state, action) {
         if (action.type === 'ADD') {
             return {
-                movies : [...state.movies, action.movie],
+                movies : [ action.movie, ...state.movies],
                 addMovie,
                 removeMovie,
             };

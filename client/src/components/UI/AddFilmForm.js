@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import BackDrop from '../UX/BackDrop';
 import LoadingSpinner from '../UX/LoadingSpinner';
 import classes from './AddFilmForm.module.css';
 import Button from './Button';
+import MoviesContext from '../../Contexts/MoviesContext';
 
 
 const AddFilmForm = (props) => {
@@ -11,7 +12,7 @@ const AddFilmForm = (props) => {
     const [nameInput, setnameInput] = useState('');
     const [yearInput, setyearInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
+    const moviesContext = useContext(MoviesContext);
 
     let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
 
@@ -59,9 +60,9 @@ const AddFilmForm = (props) => {
             setFetchError(null);
             setnameInput('');
             setyearInput('');
+            moviesContext.addMovie(movie);
             // no error, we just hide the form
             props.hideForm();
-            props.addMovie(movie);
         }
     };
 
