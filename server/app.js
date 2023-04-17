@@ -68,6 +68,17 @@ app.post('/api/delete', async (req,res) => {
     res.send(JSON.stringify(queryResult));
 });
 
+// Route that handles the login authentication
+app.post('/api/login', (req, res) => {
+
+    const userObj = {
+        username: req.body.userName,
+        password: req.body.password
+    }
+
+    
+});
+
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
