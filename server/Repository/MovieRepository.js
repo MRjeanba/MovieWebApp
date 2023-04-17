@@ -6,7 +6,9 @@
 const Movie = require('../Models/MovieModel');
 const mongoose = require('mongoose');
 
+
 async function storeMovie(movieData) {
+
 
     // Check, if the error is not null, then we fetched an exisitng object
     // So we can store it in our database
@@ -18,8 +20,9 @@ async function storeMovie(movieData) {
         await movieToInsert.save();
         return movieData; // we return the actual movie if successfully stored
     }
+
     // we return false if we encountered an error when saving the movie
-    return {error: true, message: "We encountered a problem while trying to save your movie..."};
+    return { error: true, message: "We encountered a problem while trying to save your movie..." };
 };
 
 /**
@@ -28,36 +31,43 @@ async function storeMovie(movieData) {
  * @param {*ObjectId - the unique id of the movie in the DB} givenId
  * @returns an object containing an error state about the query, but also an informative message for the users
  */
-async function deleteMovie(givenId){
+async function deleteMovie(givenId) {
 
     // We need to transform our string from the front end into an object ID to perform the query in mongo DB
     const objectId = new mongoose.Types.ObjectId(givenId);
     console.log('Object id to delete: ' + objectId);
     try {
-        const result = await Movie.Movie.deleteOne({_id: objectId});
+        const result = await Movie.Movie.deleteOne({ _id: objectId });
         console.log(result);
-        if(result.acknowledged === true){
-            
-            return {error:false, message: 'the movie has been correctly deleted'};
+        if (result.acknowledged === true) {
+
+            return { error: false, message: 'the movie has been correctly deleted' };
         } else {
-            return {error: false, message: 'we are not able to delete your movie... contact the developper'};
+            return { error: false, message: 'we are not able to delete your movie... contact the developper' };
         }
 
     } catch (error) {
         console.log(error);
-        return {error: true, message: 'An error occured, we were not able to delete your movie...'};
+        return { error: true, message: 'An error occured, we were not able to delete your movie...' };
     }
-    
+
+}
+async function findAllMovies() {
+
+    const movies = await Movie.Movie.find({});
+    return movies;
 }
 
 // Check in the database if a movie with the corresponding ID exists
-async function findMovieById(givenId){
+async function findMovieById(givenId) {
 
-    const movie = await Movie.Movie.find({id: givenId});
-    if(movie.length === 0){
+    const movie = await Movie.Movie.find({ id: givenId });
+    if (movie.length === 0) {
+
         return false;
     }
     console.log("we found this movie");
+
     return movie;
 }
 
@@ -65,4 +75,5 @@ module.exports = {
     findMovieById,
     storeMovie,
     deleteMovie,
+    findAllMovies,
 }

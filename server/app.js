@@ -9,16 +9,19 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const serverMethods = require('./BuisnessLogic/serverMethods');
+const userRepo = require('./Repository/UserRepository');
+const { findAllMovies } = require('./Repository/MovieRepository');
+
 mongoose.set('strictQuery', false);
+
 const app = express();
 
 app.use(bodyParser.json());
 
 // To be able to get data in req.body
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Connection to the DB
 mongoose.connect("mongodb://localhost:27017/movieDB");
+
 
 const apiKey = process.env.APIKEY;
 const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + apiKey + '&query=';
@@ -47,7 +50,7 @@ app.get('/api/storedMovies', async (req,res) => {
 
     let storedMovies = [];
     try {
-        const dataM = await Movie.Movie.find({ });
+        const dataM = findAllMovies();
         console.log(dataM);
         storedMovies = [...dataM];
     } catch (error) {
@@ -69,14 +72,18 @@ app.post('/api/delete', async (req,res) => {
 });
 
 // Route that handles the login authentication
-app.post('/api/login', (req, res) => {
+app.post('/api/login', async(req, res) => {
+
 
     const userObj = {
         username: req.body.userName,
         password: req.body.password
     }
 
-    
+    console.log("works fine here: " + userObj);
+    userRepo.login(userObj); // this should create the user in the db
+    console.log('created??');
+
 });
 
 app.listen(PORT, () => {

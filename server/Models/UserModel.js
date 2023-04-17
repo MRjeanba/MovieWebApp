@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { groupSchema } = require('./GroupModel');
 mongoose.set('strictQuery', false);
 
 
