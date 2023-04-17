@@ -4,7 +4,7 @@ const User = require('../Models/UserModel');
 const mongoose = require('mongoose');
 
 // Search in the database for a particular user
-async function findUserInDb(givenId){
+async function findUserInDb(userObj){
 
     if(movie.length === 0){
         return false;
@@ -14,7 +14,7 @@ async function findUserInDb(givenId){
 }
 
 module.exports = {
-    findMovieById,
+    findUserInDb,
     storeMovie,
     deleteMovie,
 }
