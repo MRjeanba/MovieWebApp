@@ -23,13 +23,12 @@ const AddFilmForm = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 }
             });
 
         const movieData = await response.json();
         setIsLoading(false);
-
+        
         return movieData;
     };
 

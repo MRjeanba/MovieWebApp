@@ -7,6 +7,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 3001;
 const serverMethods = require('./BuisnessLogic/serverMethods');
@@ -21,6 +22,7 @@ const app = express();
 // To be able to get data in req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 mongoose.connect("mongodb://localhost:27017/movieDB");
 
@@ -95,11 +97,11 @@ app.post('/api/login', async(req, res) => {
 
 // middleware
 function authenticationMiddleware(req,res,next){
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if(token == null) return res.sendStatus(401);
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if(err) return res.sendStatus(403);
+    // const authHeader = req.headers['authorization'];
+    const token = req.cookies['token']; //  && authHeader.split(' ')[1];
+    if(token == null) return res.sendStatus(401).send({error:true, message:'You are not authenticated, try to refresh the page'});
+    jwt.verify(token.token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if(err) return res.status(403).send({error:true, message:'You are not authorized to use this resource'});
         req.user = user; // identify the user 
         next();
     })
