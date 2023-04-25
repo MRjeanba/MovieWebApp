@@ -13,7 +13,13 @@ function App() {
   const [ moviesStored, setMoviesStored ] = useState([]); // Deprecated, use the context instead, remove it if nothing breaks
   const [ isLoading, setIsLoading ] = useState(false);
   const [ movieDetails, setMovieDetails ] = useState(null);
-  const token = localStorage.getItem("tokenValue");
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+
+  const token = localStorage.getItem("token");
+
+  function authenticate(){
+    setIsAuthenticated(true);
+  }
   const showForm = () =>{
     setIsFormShown(true);
   };
@@ -32,6 +38,7 @@ function App() {
 
   };
 
+
   const firstFetch = async () => {
     setIsLoading(true);
     const response = await fetch("api/storedMovies");
@@ -44,8 +51,12 @@ function App() {
 
   // At the first render, we fetch the movies from our database and display them in our state
   useEffect(() => {
-    firstFetch();
-  }, []);
+
+    if (token != null) {
+      firstFetch();
+    }
+
+  }, [token]);
 
   // we can manage the authentication here
   // steps to do next: 1- check in local storage if user has a token,
@@ -54,9 +65,9 @@ function App() {
   // 3 - credentials not correct, then display an error message.
 
   // no empty array of dependencies, then it is done at each refresh
-  useEffect(() => {
+  // useEffect(() => {
     
-  })
+  // })
 
   
   return (
@@ -70,7 +81,7 @@ function App() {
         {isLoading && <LoadingSpinner text="Retrieving your movies..." />}
         <MovieItems displayMovie={displayMovieData} />
         {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails} />}
-      </MoviesProvider> : <LoginPage />
+      </MoviesProvider> : <LoginPage authenticate={authenticate}/>
     } 
     </>
     

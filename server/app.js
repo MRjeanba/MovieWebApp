@@ -7,9 +7,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require("express");
 const bodyParser = require("body-parser");
+const jwt = require('jsonwebtoken');
 const PORT = process.env.PORT || 3001;
 const serverMethods = require('./BuisnessLogic/serverMethods');
 const userRepo = require('./Repository/UserRepository');
+const MovieRepository = require('./Repository/MovieRepository');
 const { findAllMovies } = require('./Repository/MovieRepository');
 
 mongoose.set('strictQuery', false);
@@ -50,10 +52,11 @@ app.get('/api/storedMovies', async (req,res) => {
 
     let storedMovies = [];
     try {
-        const dataM = findAllMovies();
+        const dataM = await findAllMovies();
         console.log(dataM);
         storedMovies = [...dataM];
-    } catch (error) {
+    } catch (error) {        storedMovies = [...dataM];
+
         console.log(error);
         storedMovies = { error: true, errMessage: error };
     }
@@ -67,24 +70,38 @@ app.post('/api/delete', async (req,res) => {
 
     const movieId = req.body.id;
     console.log(movieId);
-    const queryResult = await serverMethods.deleteMovie(movieId);
+    const queryResult = await MovieRepository.deleteMovie(movieId);
     res.send(JSON.stringify(queryResult));
 });
 
 // Route that handles the login authentication
 app.post('/api/login', async(req, res) => {
-
-
     const userObj = {
         username: req.body.userName,
         password: req.body.password
     }
 
-    console.log("works fine here: " + userObj);
-    userRepo.login(userObj); // this should create the user in the db
-    console.log('created??');
+    const token = await userRepo.login(userObj);
+
+    res.send(JSON.stringify(token));
 
 });
+
+// middleware
+function authenticateToken(req,res,next){
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if(token == null) return res.sendStatus(401);
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+        if(err) return res.sendStatus(403);
+        req.user = user; // identify the user 
+        next();
+    })
+}
+
+function generateAccessToken(user){
+    return jwt.sign(userObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
+}
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
