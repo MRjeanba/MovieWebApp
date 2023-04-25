@@ -30,7 +30,7 @@ const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + apiKey +
 const imageUrl = "https://image.tmdb.org/t/p/w400/";
 
 // When user makes a get request for a movie, we make the request to the API and send back the data
-app.get('/api/:movieName/:movieYear', async (req, res) => {
+app.get('/api/:movieName/:movieYear', authenticationMiddleware,  async (req, res) => {
 
     movieName = req.params.movieName;
     movieYear = req.params.movieYear;
@@ -66,7 +66,7 @@ app.get('/api/storedMovies', async (req,res) => {
 });
 
 // Route responsible to handle delete call on a particular movie ID
-app.post('/api/delete', async (req,res) => {
+app.post('/api/delete', authenticationMiddleware, async (req,res) => {
 
     const movieId = req.body.id;
     console.log(movieId);
@@ -76,7 +76,7 @@ app.post('/api/delete', async (req,res) => {
 
 // Route that handles the login authentication
 app.post('/api/login', async(req, res) => {
-    
+
     const userObj = {
         username: req.body.userName,
         password: req.body.password
@@ -89,7 +89,7 @@ app.post('/api/login', async(req, res) => {
 });
 
 // middleware
-function authenticateToken(req,res,next){
+function authenticationMiddleware(req,res,next){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if(token == null) return res.sendStatus(401);
