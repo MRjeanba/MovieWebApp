@@ -84,7 +84,12 @@ app.post('/api/login', async(req, res) => {
 
     const token = await userRepo.login(userObj);
 
-    res.send(JSON.stringify(token));
+    // protects the token by providing it only during the requests
+    res.cookie('token',token,{
+        maxAge: 3600000,
+        httpOnly:true
+    });
+    res.send(JSON.stringify({tokenExpiration:'3600000',login:true}));
 
 });
 

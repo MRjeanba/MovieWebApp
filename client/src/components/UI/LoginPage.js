@@ -42,7 +42,7 @@ const LoginPage = (props) => {
             setHasError({ message: "The given informations are not correct..." });
         }
         else{
-            localStorage.setItem('token', token.token);
+            localStorage.setItem('token', token.tokenExpiration);
             props.authenticate();
         }
 

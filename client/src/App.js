@@ -54,6 +54,11 @@ function App() {
 
     if (token != null) {
       firstFetch();
+
+      // Destroy the client token after some time, user won't be able to do request anymore and will be redirected to loginPage
+      setTimeout(()=>{
+        localStorage.removeItem('token');
+      },3600000);
     }
 
   }, [token]);
