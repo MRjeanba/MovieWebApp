@@ -38,10 +38,10 @@ async function registerNewUser(userObj) { // will use the bcrypt library to hash
 async function login(userObj) {
     const userPwdHashed = await findUser(userObj.username.toString().trim());
     const match = await bcrypt.compare(userObj.password, userPwdHashed);
- 
+    const userToIncludeInToken = {uName:userObj.username};
     if (match) {
         console.log('user credentials work!!, creating the token...');
-        const accessToken = jwt.sign(userObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
+        const accessToken = jwt.sign(userToIncludeInToken, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
         //const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN_SECRET);
         const token = { login: true, token: accessToken}; //refreshToken: refreshToken };
         return token;

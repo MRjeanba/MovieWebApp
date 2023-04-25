@@ -76,6 +76,7 @@ app.post('/api/delete', async (req,res) => {
 
 // Route that handles the login authentication
 app.post('/api/login', async(req, res) => {
+    
     const userObj = {
         username: req.body.userName,
         password: req.body.password
