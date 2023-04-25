@@ -17,8 +17,16 @@ const AddFilmForm = (props) => {
     let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
 
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
-    async function fetchMovies(EnteredName, enteredYear) {
-        const response = await fetch('api/' + EnteredName + '/' + enteredYear);
+    async function fetchMovie(EnteredName, enteredYear) {
+        const response = await fetch('api/' + EnteredName + '/' + enteredYear,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                }
+            });
+
         const movieData = await response.json();
         setIsLoading(false);
 
@@ -44,7 +52,7 @@ const AddFilmForm = (props) => {
         setIsLoading(true);
         ev.preventDefault();
 
-        const movie = await fetchMovies(nameInput, yearInput);
+        const movie = await fetchMovie(nameInput, yearInput);
         console.log(movie);
 
         if (movie.error) {

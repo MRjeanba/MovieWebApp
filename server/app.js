@@ -18,10 +18,10 @@ mongoose.set('strictQuery', false);
 
 const app = express();
 
-app.use(bodyParser.json());
-
 // To be able to get data in req.body
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.connect("mongodb://localhost:27017/movieDB");
 
 
@@ -40,8 +40,8 @@ app.get('/api/:movieName/:movieYear', authenticationMiddleware,  async (req, res
         // We tchek here if the fetch resulted in an error or not
         if(result.error){
             res.send(JSON.stringify(result));
-        } else{ // additional tcher when we save the movie fetched
-            const isStored = await serverMethods.storeMovie(result);
+        } else{ // additional tchek when we save the movie fetched
+            const isStored = await MovieRepository.storeMovie(result);
             res.send(JSON.stringify(isStored));
         }
     });

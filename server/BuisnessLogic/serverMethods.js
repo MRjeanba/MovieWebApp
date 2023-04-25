@@ -1,5 +1,7 @@
 const request = require('request');
 const movieRepo = require('../Repository/MovieRepository');
+const mongoose = require('mongoose');
+
 /**
  * This method is responsible to make an external GET request to the TMDB API in order to get the data of the movie that the user wants to add
  * @param {*string The url of the TMDB API} movieURL 

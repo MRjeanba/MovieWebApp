@@ -41,7 +41,7 @@ async function login(userObj) {
     const userToIncludeInToken = {uName:userObj.username};
     if (match) {
         console.log('user credentials work!!, creating the token...');
-        const accessToken = jwt.sign(userToIncludeInToken, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
+        const accessToken = jwt.sign(userToIncludeInToken, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
         //const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN_SECRET);
         const token = { login: true, token: accessToken}; //refreshToken: refreshToken };
         return token;
