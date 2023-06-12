@@ -25,7 +25,7 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
         });
 
         const message = await response.json(); // the backend returns a message to give info about the user creation process
-        return message;
+        alert(message.message);
     }
 };
 
@@ -61,7 +61,14 @@ const LoginPage = (props) => {
             }
         } else {
             //store the confirmation message inside of a variable, this message is returned by the BE from a call on a route to create a new user
+            const message = await loginSignInFetch(uName, pwd, requestType);
 
+            if (!message.result) {
+                setHasError({ message: message.message });
+            }
+            else {
+                alert(message.message); //Try maybe to clear inputs fields 
+            }
         }
         
 
@@ -70,7 +77,7 @@ const LoginPage = (props) => {
     return (
         <div className={classes.modal}>
             <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
-            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username' />
+            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username'/>
             <input ref={pwdRef} type='password' placeholder='password' />
             <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
             <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>

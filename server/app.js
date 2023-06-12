@@ -102,8 +102,9 @@ app.post('/api/registerUser', async(req,res) => {
         password: req.body.password
     };
 
-    const message = await userRepo.register(userObj);
+    const message = await userRepo.register(userObj); //{ result:bool, message:string }
 
+    res.send(JSON.stringify(message))
 
 
 });
