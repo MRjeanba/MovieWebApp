@@ -9,9 +9,10 @@ require('dotenv').config();
 /**
  * 
  * @param {*} userObj The user we are tryng to add in DB
+ * @returns a message that indicates whether or not if the user creations has been successfully done
  */
-// Search in the database for a particular user
-async function registerNewUser(userObj) { // will use the bcrypt library to hash and save hashed passwords!!
+// Create in the database a new user
+async function register(userObj) { // will use the bcrypt library to hash and save hashed passwords!!
 
     bcrypt.hash(userObj.password, 10, async (err, hash) => {
         if (err) {
