@@ -95,6 +95,20 @@ app.post('/api/login', async(req, res) => {
 
 });
 
+app.post('/api/registerUser', async(req,res) => {
+
+    const userObj = {
+        username: req.body.userName,
+        password: req.body.password
+    };
+
+    const message = await userRepo.register(userObj); //{ result:bool, message:string }
+
+    res.send(JSON.stringify(message))
+
+
+});
+
 // middleware
 function authenticationMiddleware(req,res,next){
     // const authHeader = req.headers['authorization'];

@@ -15,6 +15,17 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
         });
         const token = await response.json();
         return token;
+    } else { // post request to the api to create a new user
+        const response = await fetch('api/registerUser', {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        const message = await response.json(); // the backend returns a message to give info about the user creation process
+        alert(message.message);
     }
 };
 
@@ -25,7 +36,7 @@ const LoginPage = (props) => {
     const uNameRef = useRef();
     const pwdRef = useRef();
 
-    async function loginHandler() {
+    async function loginHandler(requestType) {
         //setIsLoading(true);
         // basic verification from the FE (trim it and check if empty)
         const uName = uNameRef.current.value.trim();
@@ -36,25 +47,40 @@ const LoginPage = (props) => {
         } else if (pwd.length < 6) {
             setHasError({ message: "This password is too short" });
         }
-        const token = await loginSignInFetch(uName, pwd, "login");
 
-        if (!token.login){
-            setHasError({ message: "The given informations are not correct..." });
+        //Depending on the button pressed, we do either login or sign in
+        if(requestType === "login"){
+            const token = await loginSignInFetch(uName, pwd, requestType);
+
+            if (!token.login) {
+                setHasError({ message: "The given informations are not correct..." });
+            }
+            else {
+                localStorage.setItem('token', token.tokenExpiration);
+                props.authenticate();
+            }
+        } else {
+            //store the confirmation message inside of a variable, this message is returned by the BE from a call on a route to create a new user
+            const message = await loginSignInFetch(uName, pwd, requestType);
+
+            if (!message.result) {
+                setHasError({ message: message.message });
+            }
+            else {
+                alert(message.message); //Try maybe to clear inputs fields 
+            }
         }
-        else{
-            localStorage.setItem('token', token.tokenExpiration);
-            props.authenticate();
-        }
+        
 
     }
 
     return (
         <div className={classes.modal}>
             <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
-            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username' />
+            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username'/>
             <input ref={pwdRef} type='password' placeholder='password' />
-            <button className={classes.modalButton} onClick={loginHandler}>Sign in</button>
-            <button className={classes.modalButton} onClick={() => { }}>Create account</button>
+            <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
+            <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
             {isLoading && <p className={classes.update}>Verifying your informations...</p>}
             {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
             {isLoading && <LoadingSpinner />}

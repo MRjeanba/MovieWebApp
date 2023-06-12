@@ -7,11 +7,20 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 
 /**
- * 
+ * Create in the database a new user
  * @param {*} userObj The user we are tryng to add in DB
+ * @returns a message that indicates whether or not if the user creations has been successfully done
  */
-// Search in the database for a particular user
-async function registerNewUser(userObj) { // will use the bcrypt library to hash and save hashed passwords!!
+async function register(userObj) { // will use the bcrypt library to hash and save hashed passwords!!
+
+    const verifyUname = await findUser(userObj.username.toString().trim());
+
+    // Some verifications are done before processing with the creation
+    if(!verifyUname.error){
+        console.log(verifyUname);
+        return {result:false, message: "Try to use an other username please."};
+    }
+
 
     bcrypt.hash(userObj.password, 10, async (err, hash) => {
         if (err) {
@@ -25,6 +34,8 @@ async function registerNewUser(userObj) { // will use the bcrypt library to hash
         await user.save(); // to save the newly created user in the database
 
     });
+
+    return {result:false, message: "Your account has been successfully saved!, try to log in now!"};
 
 
 
@@ -69,4 +80,5 @@ async function findUser(usernameToFind) {
 
 module.exports = {
     login,
+    register,
 }
