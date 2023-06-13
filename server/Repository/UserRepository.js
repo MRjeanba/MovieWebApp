@@ -37,8 +37,6 @@ async function register(userObj) { // will use the bcrypt library to hash and sa
 
     return {result:false, message: "Your account has been successfully saved!, try to log in now!"};
 
-
-
 }
 
 /**
@@ -53,8 +51,7 @@ async function login(userObj) {
     if (match) {
         console.log('user credentials work!!, creating the token...');
         const accessToken = jwt.sign(userToIncludeInToken, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
-        //const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN_SECRET);
-        const token = { login: true, token: accessToken}; //refreshToken: refreshToken };
+        const token = { login: true, token: accessToken};
         return token;
     } else {
 
