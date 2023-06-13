@@ -69,7 +69,7 @@ const DeleteUpdateModal = (props) => {
             <div className={classes.modal}>
                 <h2 className={classes.title}>Are you sure that you want to {props.actionType.method}?</h2>
                 {outcomesText}
-                <button className={classes.modalButton} onClick={onProceedHandler}>Proceed</button>
+                {props.actionType.method === 'delete' && <button className={classes.modalButton} onClick={onProceedHandler}>Proceed</button>}
                 <button className={classes.modalButton} onClick={props.hideModal}>Cancel</button>
                 {isLoading && <p className={classes.update}>Deleting your movie...</p>}
                 {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
