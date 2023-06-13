@@ -31,6 +31,8 @@ const apiKey = process.env.APIKEY;
 const movieURL = 'https://api.themoviedb.org/3/search/movie?api_key=' + apiKey + '&query=';
 const imageUrl = "https://image.tmdb.org/t/p/w400/";
 
+
+
 // When user makes a get request for a movie, we make the request to the API and send back the data
 app.get('/api/:movieName/:movieYear', authenticationMiddleware,  async (req, res) => {
 
@@ -55,7 +57,6 @@ app.get('/api/storedMovies', async (req,res) => {
     let storedMovies = [];
     try {
         const dataM = await findAllMovies();
-        console.log(dataM);
         storedMovies = [...dataM];
     } catch (error) {        storedMovies = [...dataM];
 
@@ -66,6 +67,8 @@ app.get('/api/storedMovies', async (req,res) => {
     // Send back the stored objects to the front end
     res.send(JSON.stringify(storedMovies));
 });
+
+
 
 // Route responsible to handle delete call on a particular movie ID
 app.post('/api/delete', authenticationMiddleware, async (req,res) => {
@@ -113,16 +116,19 @@ app.post('/api/registerUser', async(req,res) => {
 function authenticationMiddleware(req,res,next){
     // const authHeader = req.headers['authorization'];
     const token = req.cookies['token']; //  && authHeader.split(' ')[1];
-    if(token == null) return res.sendStatus(401).send({error:true, message:'You are not authenticated, try to refresh the page'});
+    console.log("hey???"+ token);
+
+    if(token == null) return res.send({error:true, message:'You are not authenticated, try to refresh the page', status:401});
+    if(token.token === undefined) return res.send({error:true, message:'You are not authenticated, try to refresh the page',status:403});
+    //if(err) return res.sendStatus(500).send({error:true, message:'An error occured in our servers'});
+
     jwt.verify(token.token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-        if(err) return res.status(403).send({error:true, message:'You are not authorized to use this resource'});
+        console.log("You are verifying the created token")
+        if(err) return res.send({error:true, message:'You are not authorized to use this resource',status:403});
         req.user = user; // identify the user 
         next();
-    })
-}
-
-function generateAccessToken(user){
-    return jwt.sign(userObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
+    });
+    
 }
 
 app.listen(PORT, () => {
