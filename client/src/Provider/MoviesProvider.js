@@ -50,7 +50,6 @@ const MoviesProvider = (props) => {
     },[state])
 
 
-
     return (
         <MoviesContext.Provider value={state}>
             {props.children}

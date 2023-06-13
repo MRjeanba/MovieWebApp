@@ -9,12 +9,12 @@ const movieSchema = new mongoose.Schema({
     overview: String,
     poster: String,
     release: String,
-    review: Number
+    review: Number,
+    localReviews: [Number],
 });
 
 // Creation of the model, that uses the previous defined schema
 const Movie = mongoose.model("Movie", movieSchema);
-
 
 module.exports = {
     movieSchema,

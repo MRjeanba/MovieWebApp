@@ -21,9 +21,11 @@ const MovieDetails = (props) => {
             <BackDrop backdropHandler={hideDetails} />
             <div className={classes.modal}>
                 <div className={classes.container1}>
+                    <button>Add review</button>
                     <img className={classes.imgDetails} src={imgUrl} />
                     <span className={"fa fa-star " + classes.checked} style={{fontSize: '28px'}}></span>
                     <p className={classes.rating}>{movieObject.review}</p>
+                    <p>{movieObject.localReviews}</p>
                 </div>
                 <div className={classes.container2}>
                     <KebabMenuIcon items={["Delete","Update"]} movieId={movieObject.id} hideMovieDetails={hideDetails}/>
