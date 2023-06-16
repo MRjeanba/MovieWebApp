@@ -12,7 +12,8 @@ const MovieItem = (props) => {
             img: props.movie.poster,
             overview: props.movie.overview,
             review: props.movie.review,
-            id: props.movie._id
+            id: props.movie._id,
+            localReviews: props.movie.localReviews
         };
         props.displayMovie(movie);
     };

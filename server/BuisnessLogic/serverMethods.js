@@ -56,6 +56,13 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
     });
 };
 
+
+async function addReviewToMovie(review, movieId){
+
+    //Use the add review method from the movie repo, if successfull return true
+    
+}
+
 module.exports = {
     getMovie,
 }

@@ -57,8 +57,8 @@
     margin-top: 5%;
     margin-right: 3%;
 }
-button{
-    display: block;
+.addReview{
+    display: inline-block;
     margin: auto;
-    margin-top: 3%;
+    margin-top: 1%;
 }

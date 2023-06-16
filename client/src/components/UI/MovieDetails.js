@@ -21,7 +21,6 @@ const MovieDetails = (props) => {
         setIsAddReviewShown(false);
     }
 
-
     // Transform movie link for img since in this modal we can make the movie image larger
     let imgUrl = props.details.img;
     imgUrl = imgUrl.replace('w400','w500');
@@ -31,10 +30,10 @@ const MovieDetails = (props) => {
             <BackDrop backdropHandler={hideDetails} />
             <div className={classes.modal}>
                 <div className={classes.container1}>
-                    <button onClick={showAddReviewModal}>Add review</button>
                     <img className={classes.imgDetails} src={imgUrl} />
                     <span className={"fa fa-star " + classes.checked} style={{fontSize: '28px'}}></span>
                     <p className={classes.rating}>{movieObject.review}</p>
+                    <button className={classes.addReview} onClick={showAddReviewModal}>Add review</button>
                     <p>{movieObject.localReviews}</p>
                 </div>
                 <div className={classes.container2}>
@@ -42,7 +41,7 @@ const MovieDetails = (props) => {
                     <h1 className={classes.title}>{movieObject.title}</h1>
                     <p className={classes.overview}>{movieObject.overview}</p>
                 </div>
-                {isAddReviewShown && <AddReviewModal hideModal={hideAddReviewModal} title="Add a review to this movie!" />}
+                {isAddReviewShown && <AddReviewModal currentMovie={movieObject} hideModal={hideAddReviewModal} title="Add a review to this movie!" />}
             </div>
             
         </>

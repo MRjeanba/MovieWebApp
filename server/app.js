@@ -112,6 +112,15 @@ app.post('/api/registerUser', async(req,res) => {
 
 });
 
+app.post('/api/AddReview', async(req,res) => {
+
+    const review = req.body.review
+    const movieId = req.body.movieId
+    
+
+
+});
+
 // middleware
 function authenticationMiddleware(req,res,next){
     // const authHeader = req.headers['authorization'];
