@@ -71,11 +71,29 @@ async function findMovieById(givenId) {
     return movie;
 }
 
-async function 
+/**
+ * 
+ * @param {*} review the review integer entered by the user
+ * @param {*} movieId the movie id of which we wanna add a review
+ */
+async function addReviewToMovie(review, movieId){
+
+    const objectId = new mongoose.Types.ObjectId(movieId);
+    const movie = findMovieById(objectId)
+
+    if (movie) {
+        // then, we add the new review to the array of reviews
+        movie.localReviews.push(parseInt(review))
+        return { success: true }
+    } else {
+        return { success: false, message: 'movie not found in the DB...' }
+    }
+}
 
 module.exports = {
     findMovieById,
     storeMovie,
     deleteMovie,
     findAllMovies,
+    addReviewToMovie,
 }
