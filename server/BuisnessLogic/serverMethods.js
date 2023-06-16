@@ -57,12 +57,25 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
 };
 
 
-async function addReviewToMovie(review, movieId){
+/**
+ *
+ * @param {Integer} review the Integer value given by the user as a review
+ * @param {mongoose.ObjectId} movieId the Id of the movie of which we wanna add a review
+ * @return {success:bool}
+ */
+async function addReview(review, movieId) {
 
     //Use the add review method from the movie repo, if successfull return true
-    
+    const successObj = movieRepo.addReviewToMovie(review, movieId)
+
+    if (successObj.success) {
+        return { success: true }
+    } else {
+        return { success: false }
+    }
 }
 
 module.exports = {
     getMovie,
+    addReview,
 }
