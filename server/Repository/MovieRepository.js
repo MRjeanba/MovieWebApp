@@ -79,7 +79,7 @@ async function findMovieById(givenId) {
 async function addReviewToMovie(review, movieId){
 
     const objectId = new mongoose.Types.ObjectId(movieId);
-    const movie = findMovieById(objectId)
+    const movie = await findMovieById(objectId)
 
     if (movie) {
         // then, we add the new review to the array of reviews

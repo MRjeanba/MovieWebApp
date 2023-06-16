@@ -66,7 +66,7 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
 async function addReview(review, movieId) {
 
     //Use the add review method from the movie repo, if successfull return true
-    const successObj = movieRepo.addReviewToMovie(review, movieId)
+    const successObj = await movieRepo.addReviewToMovie(review, movieId)
 
     if (successObj.success) {
         return { success: true }
