@@ -112,6 +112,21 @@ app.post('/api/registerUser', async(req,res) => {
 
 });
 
+app.post('/api/AddReview', async(req,res) => {
+
+    const review = req.body.review
+    const movieId = req.body.movieId
+
+    const result = await serverMethods.addReview(review,movieId)
+
+    if (result.success) {
+        res.send(JSON.stringify({status:200, message: 'The review has been correctly added to the movie!'}))
+    } else {
+        res.send(JSON.stringify({status:500, message: "An error occured, we weren't able to add your review..." })) 
+    }
+
+});
+
 // middleware
 function authenticationMiddleware(req,res,next){
     // const authHeader = req.headers['authorization'];

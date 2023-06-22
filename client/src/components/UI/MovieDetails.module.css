@@ -21,7 +21,6 @@
 .container1 {
     height: 100%;
     width: 100%;
-
 }
 .title{
     margin: 0;
@@ -48,7 +47,7 @@
     margin: auto;
     width: 80%;
     height: 80%;
-    margin-top: 10%;
+    margin-top: 4%;
     border-radius: 7px;
 }
 
@@ -57,4 +56,9 @@
     font-size: larger;
     margin-top: 5%;
     margin-right: 3%;
+}
+.addReview{
+    display: inline-block;
+    margin: auto;
+    margin-top: 1%;
 }
