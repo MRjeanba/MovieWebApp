@@ -29,7 +29,7 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
                 throw new Error("We couldn't find the movie you are trying to add...");
             }
             // if the movie that we want to add already exist, then we throw an error and prevent the user
-            if(await movieRepo.findMovieById(movieData.results[0].id)){
+            if(await movieRepo.findMovieById(movieData.results[0].id, false)){
                 throw new Error("This movie is already added...");
             }
 
@@ -60,8 +60,8 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
 /**
  *
  * @param {Integer} review the Integer value given by the user as a review
- * @param {mongoose.ObjectId} movieId the Id of the movie of which we wanna add a review
- * @return {success:bool}
+ * @param {mongoose.Objectid} movieId the Id(_id) of the movie of which we wanna add a review
+ * @return {success:bool} an object containing a field succes that holds a boolean
  */
 async function addReview(review, movieId) {
 

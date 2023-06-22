@@ -1,35 +1,42 @@
 import classes from './AddReviewModal.module.css';
 import BackDrop from '../UX/BackDrop';
-import { useReducer, useRef } from 'react';
+import { useRef, useState } from 'react';
 
 const AddReviewModal = (props) => {
 
-    // The call to the api should be made from there : post api/AddReview
-    // We push in the localReviews field from the current movie object the entered value
-    // we also do it in the front end side to give a instant feedback to the user 
     const reviewRef = useRef();
+    
+    const [errorMessage, setErrorMessage] = useState('')
 
+    /**
+     * 
+     * @param {int} reviewEntered the review entered by the user for the movie
+     * @param {mongoose.object.id} movieId the _id of the movie that the user wants to review
+     * @returns the message from the backend whether or not the review has been added to the movie
+     */
     async function postReviewScore(reviewEntered, movieId) {
 
         const obj = { review: reviewEntered, movieId: movieId }
-
         const response = await fetch('api/AddReview',
             {
+                method: "post",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
-                method: 'POST',
-                body: obj
+                body: JSON.stringify(obj)
             });
         
+        const serverResponse = await response.json()
+
+        return serverResponse
     }
+
 
     /**
      * Add the users review to the buisness model object used in the FE
-     * @returns nothing
      */
-    function addUserReview(){
+    async function addUserReview(){
         const reviewEntered = reviewRef.current.value;
 
         if(reviewEntered == null || reviewEntered < 0 || reviewEntered > 10 || reviewEntered.length === 0){
@@ -37,6 +44,23 @@ const AddReviewModal = (props) => {
             return;
         }
         props.currentMovie.localReviews.push(parseInt(reviewRef.current.value));
+        const serverResponse = await postReviewScore(reviewEntered,props.currentMovie.id)
+        let message = ""
+
+        switch (serverResponse.status) {
+            case 200:
+                message = serverResponse.message
+                alert(message)
+                break;
+        
+            case 500:
+                message = serverResponse.message
+                setErrorMessage(message)
+                break;
+
+            default:
+                break;
+        }
         props.hideModal();
     };
 
@@ -46,6 +70,7 @@ const AddReviewModal = (props) => {
                 <div className={classes.modal}>
                     <h2 className={classes.title}>{props.title}</h2>
                     <input ref={reviewRef} className={classes.reviewInput} type="number" min={0} max={10} placeholder="Your rating out of 10"></input>
+                    {errorMessage && <p>{errorMessage}</p>}
                     <button className={classes.modalButton} onClick={addUserReview}>Submit</button>
                     <button className={classes.modalButton} onClick={props.hideModal}>Cancel</button>
                 </div>

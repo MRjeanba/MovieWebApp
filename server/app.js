@@ -116,13 +116,13 @@ app.post('/api/AddReview', async(req,res) => {
 
     const review = req.body.review
     const movieId = req.body.movieId
-    
+
     const result = await serverMethods.addReview(review,movieId)
 
     if (result.success) {
-        return {status:200, message: 'The review has been correctly added to the movie!'}
+        res.send(JSON.stringify({status:200, message: 'The review has been correctly added to the movie!'}))
     } else {
-        return {status:500, message: "An error occured, we weren't able to add your review..." }
+        res.send(JSON.stringify({status:500, message: "An error occured, we weren't able to add your review..." })) 
     }
 
 });

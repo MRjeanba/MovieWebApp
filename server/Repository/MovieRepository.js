@@ -58,34 +58,54 @@ async function findAllMovies() {
     return movies;
 }
 
-// Check in the database if a movie with the corresponding ID exists
-async function findMovieById(givenId) {
+/**
+ * 
+ * @param {*} givenId the id of the movie object that we want to retrieve, if secretID is false then we provide the simple id, if true provide the _id
+ * @param {*} secretID indicates to the function if you provide the _id or the id of the movie false = id | true = _id
+ * @returns 
+ */
+async function findMovieById(givenId, secretID) {
 
-    const movie = await Movie.Movie.find({ id: givenId });
-    if (movie.length === 0) {
+    if (!secretID) {
+        const movie = await Movie.Movie.find({ id: givenId });
+        if (movie.length === 0) {
 
-        return false;
+            return false;
+        }
+        return movie;
+    } else {
+        const objectId = new mongoose.Types.ObjectId(givenId);
+        const movie = await Movie.Movie.find({ _id: objectId });
+        if (movie.length === 0) {
+
+            return false;
+        }
+        return movie;
     }
-    console.log("we found this movie");
-
-    return movie;
+    
 }
 
 /**
  * 
- * @param {*} review the review integer entered by the user
- * @param {*} movieId the movie id of which we wanna add a review
+ * @param {*} review the review that we want to add in the reviews of the movie
+ * @param {*} movieId the _id of the movie of which we wanna add the review
+ * @returns an object of format { success: boolean, message:string } depending on the result of the queries
  */
-async function addReviewToMovie(review, movieId){
+async function addReviewToMovie(review, movieId) {
 
     const objectId = new mongoose.Types.ObjectId(movieId);
-    const movie = await findMovieById(objectId)
 
-    if (movie) {
-        // then, we add the new review to the array of reviews
-        movie.localReviews.push(parseInt(review))
+    console.log("lol" + movieId)
+
+    //const movie = await findMovieById(objectId, true)
+
+    try {
+        await Movie.Movie.updateOne(
+            { _id: objectId },
+            { $push: {localReviews: review} }
+        )
         return { success: true }
-    } else {
+    } catch (error) {
         return { success: false, message: 'movie not found in the DB...' }
     }
 }
