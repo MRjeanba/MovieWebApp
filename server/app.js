@@ -14,6 +14,7 @@ const serverMethods = require('./BuisnessLogic/serverMethods');
 const userRepo = require('./Repository/UserRepository');
 const MovieRepository = require('./Repository/MovieRepository');
 const { findAllMovies } = require('./Repository/MovieRepository');
+const crypto = require("crypto");
 
 mongoose.set('strictQuery', false);
 
@@ -52,13 +53,14 @@ app.get('/api/:movieName/:movieYear', authenticationMiddleware,  async (req, res
 });
 
 // Route responsible to fetch and send back the mongoDB data of the stored movies
-app.get('/api/storedMovies', async (req,res) => {
+app.get('/api/storedMovies', async (req, res) => {
 
     let storedMovies = [];
     try {
         const dataM = await findAllMovies();
         storedMovies = [...dataM];
-    } catch (error) {        storedMovies = [...dataM];
+    } catch (error) {
+        storedMovies = [...dataM];
 
         console.log(error);
         storedMovies = { error: true, errMessage: error };
@@ -102,12 +104,22 @@ app.post('/api/login', async(req, res) => {
 // Route that handles the user creation
 app.post('/api/registerUser', async(req,res) => {
 
+    const temp = crypto.randomBytes(64).toString('hex');
+    console.log("This is the temporary temphash for the user verif: "+temp)
+
     const userObj = {
         username: req.body.userName,
-        password: req.body.password
+        password: req.body.password,
+        active: false,
+        tempHash: temp,
     };
 
-    const message = await userRepo.register(userObj); //{ result:bool, message:string }
+    // the active prop of the user is actually false,
+    // since he did not have been verified by the web master, he cannot use the routes of the api (middleware check the active prop)
+    //Once the webmaster accepts the user, he should now be able to call the routes of the api once logged in 
+
+    const message = await userRepo.register(userObj);
+
 
     res.send(JSON.stringify(message))
 

@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     userName: String,
     //group: [groupSchema],
     active: Boolean,
+    tempHash: String,
 });
 
 // Creation of the model, that uses the previous defined schema

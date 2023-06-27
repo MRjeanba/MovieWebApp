@@ -42,7 +42,9 @@ async function getMovie(movieURL, movieName, movieYear, imageUrl, callback){
                 poster: imageUrl + movieData.results[0].poster_path,
                 release: movieData.results[0].release_date,
                 review: parseFloat(movieData.results[0].vote_average).toFixed(1),
+                localReviews: [],
             };
+            
             console.log(newMovieItem);
             callback(newMovieItem);
             

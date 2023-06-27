@@ -67,7 +67,7 @@ const LoginPage = (props) => {
                 setHasError({ message: message.message });
             }
             else {
-                alert(message.message); //Try maybe to clear inputs fields 
+                alert(message.message);
             }
         }
         
