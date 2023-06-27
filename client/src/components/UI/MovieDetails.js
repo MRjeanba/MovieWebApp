@@ -35,7 +35,7 @@ const MovieDetails = (props) => {
             <BackDrop backdropHandler={hideDetails} />
             <div className={classes.modal}>
                 <div className={classes.container1}>
-                    <img className={classes.imgDetails} src={imgUrl} />
+                    <img className={classes.imgDetails} src={imgUrl} alt='Sorry, you should see the movie image here'/>
                     {review > 0  && <span className={"fa fa-star " + classes.checked} style={{fontSize: '28px'}}></span>}
                     {review > 0 ? <p className={classes.rating}>{review}</p> : <p className={classes.rating} style={{marginTop:'2%'}}>No reviews yet...</p>}
                     <button className={classes.addReview} onClick={showAddReviewModal}>Add review</button>
