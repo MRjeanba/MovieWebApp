@@ -98,6 +98,8 @@ app.post('/api/login', async(req, res) => {
 
 });
 
+
+// Route that handles the user creation
 app.post('/api/registerUser', async(req,res) => {
 
     const userObj = {
