@@ -97,13 +97,12 @@ async function addReviewToMovie(review, movieId) {
 
     console.log("lol" + movieId)
 
-    //const movie = await findMovieById(objectId, true)
-
     try {
         await Movie.Movie.updateOne(
             { _id: objectId },
             { $push: {localReviews: review} }
-        )
+        );
+
         return { success: true }
     } catch (error) {
         return { success: false, message: 'movie not found in the DB...' }
