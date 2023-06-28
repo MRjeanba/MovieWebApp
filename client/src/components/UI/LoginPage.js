@@ -2,6 +2,11 @@ import { useRef, useState } from 'react';
 import classes from './LoginPage.module.css';
 import LoadingSpinner from '../UX/LoadingSpinner';
 
+/**
+ * 
+ * TODO: use a better logic to handle the tokens and the validity of them, I think it works well in backend but poorly in front end.
+ */
+
 async function loginSignInFetch(uName, pwd, currentFetch) {
     const userData = { userName: uName, password: pwd };
 

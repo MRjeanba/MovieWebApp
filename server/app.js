@@ -209,7 +209,7 @@ function authenticationMiddleware(req,res,next){
         if(activeValue){
             next()
         } else {
-            res.send({error:true, message:"Your account is not accepted yet... You will be able to do operation on the web application once verified",status:403});
+            res.send({error:true, message:"Your account is not accepted yet... You will be able to do operation on the web application once verified",status:200});
         }
     });
     

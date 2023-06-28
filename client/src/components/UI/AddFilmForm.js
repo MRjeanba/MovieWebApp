@@ -58,6 +58,9 @@ const AddFilmForm = (props) => {
             if (movie.message) {
                 console.log(movie.message);
                 setFetchError(movie.message);
+                if(movie.status === 401 || movie.status === 401) {
+                    localStorage.removeItem("token");
+                }
             }
             setnameInput('');
             setyearInput('');

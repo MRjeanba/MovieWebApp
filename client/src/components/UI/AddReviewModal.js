@@ -56,16 +56,19 @@ const AddReviewModal = (props) => {
             case 401:
                 message = serverResponse.message
                 alert(message)
+                localStorage.removeItem("token");
                 break;
             
             case 403:
                 message = serverResponse.message
                 alert(message)
+                localStorage.removeItem("token");
                 break;
         
             case 500:
                 message = serverResponse.message
                 setErrorMessage(message)
+                localStorage.removeItem("token");
                 break;
 
             default:

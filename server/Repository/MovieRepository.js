@@ -95,8 +95,6 @@ async function addReviewToMovie(review, movieId) {
 
     const objectId = new mongoose.Types.ObjectId(movieId);
 
-    console.log("lol" + movieId)
-
     try {
         await Movie.Movie.updateOne(
             { _id: objectId },
