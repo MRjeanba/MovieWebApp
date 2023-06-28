@@ -1,6 +1,12 @@
 # MovieWebApp
-This project will be at the end a web application in which you can add watched movies,  
-you will also be able to rate these movies
+The goal of this project is to familiarize myself with full stack development (MERN) stack.    
+This project is a web application where people will be able to add/delete movies they watched,  
+they will also be able to perform other operations like add reviews and also add comments on these movies  
+First, they have to create an account, once the account successfully verified, they will be allowed to modify  
+the content of the application.
+  
+The access to the majority of movies will be done with the help of the external API of TMDB.  
+With their help I will be able to have access to a large amount of data related to movies.
 
 # Technologies
 FrontEnd:  
@@ -27,6 +33,7 @@ If yes, then we proceed the call. Also, the middleware check if the user has bee
 
 # How to run the project:
 More to come soon...
+But node.js, express, mongodb and react will be necessary
 
 # Design of the project:
 ![Alt text](/Design.png?raw=true "")  
