@@ -29,7 +29,9 @@ async function register(userObj) { // will use the bcrypt library to hash and sa
         }
         const user = new User.User({ // we store the user with an hash password in the DB
             userName: userObj.username,
-            password: hash
+            password: hash,
+            tempHash: userObj.tempHash,
+            active: false
         });
         await user.save(); // to save the newly created user in the database
 
@@ -90,7 +92,7 @@ async function findUser(usernameToFind) {
  */
 async function updateUserActivity(tempHash) {
     const user = await User.User.find({ tempHash: tempHash });
-
+    console.log(user);
     if (user[0]?.active === false) {
 
         await User.User.updateOne(
@@ -99,9 +101,9 @@ async function updateUserActivity(tempHash) {
         );
         await User.User.updateOne(
             { tempHash: tempHash },
-            { $unset: "tempHash" }
+            { $unset: {tempHash} }
         );
-        return { error: false, message: "The user has successfully been updated in the database"}
+        return { error: false, message: "The user " + user[0]?.userName +  " has successfully been updated in the database"}
     }
     else {
         return { error: true, message: 'Unable to update this user activity...' };

@@ -158,10 +158,18 @@ app.post('/api/registerUser', async(req,res) => {
 });
 
 // Route responsible to validate the user (set the active prop to true) once the webmaster accept the account
-app.get('/api/user/validateUser/:tempHash', (req,res) => {
+app.get('/api/user/validateUser/:tempHash', async (req,res) => {
+
     const tempHash = req.params.tempHash;
-    console.log("user validation here!!!! " + tempHash);
-    
+    const result = await userRepo.updateUserActivity(tempHash);
+
+    if (!result.error) {
+        console.log("The user should have been correctly updated: " + result.message);
+        res.send(JSON.stringify(result));
+    } else {
+        console.log("An error occured during the user update: " + result.message);
+        res.send(JSON.stringify(result))
+    }
 });
 
 app.post('/api/AddReview',authenticationMiddleware, async(req,res) => {
