@@ -29,7 +29,9 @@ async function register(userObj) { // will use the bcrypt library to hash and sa
         }
         const user = new User.User({ // we store the user with an hash password in the DB
             userName: userObj.username,
-            password: hash
+            password: hash,
+            tempHash: userObj.tempHash,
+            active: false
         });
         await user.save(); // to save the newly created user in the database
 
@@ -46,7 +48,12 @@ async function register(userObj) { // will use the bcrypt library to hash and sa
  */
 async function login(userObj) {
     const userPwdHashed = await findUser(userObj.username.toString().trim());
-    const match = await bcrypt.compare(userObj.password, userPwdHashed);
+    if(userPwdHashed.error){
+        const token = { login: false, message: 'This user does not exists...' };
+        return token;
+    }
+
+    const match = await bcrypt.compare(userObj.password.toString(), userPwdHashed);
     const userToIncludeInToken = {uName:userObj.username};
     if (match) {
         console.log('user credentials work!!, creating the token...');
@@ -61,8 +68,11 @@ async function login(userObj) {
     }
 
 }
-
-// Find a certain user in the DB
+/**
+ * 
+ * @param {String} usernameToFind the username of the user we tryna find
+ * @returns an object containing the fields error:boolean message:string or the hash password if user found
+ */
 async function findUser(usernameToFind) {
     const existantUser = await User.User.find({ userName: usernameToFind });
     console.log(existantUser);
@@ -75,7 +85,51 @@ async function findUser(usernameToFind) {
     }
 }
 
+/**
+ * 
+ * @param {String} tempHash The string representing the temporary hash of the user that has not been verified yet
+ * @returns an object in form { error: boolean, message: String } containing the state whether or not the user has been updated
+ */
+async function updateUserActivity(tempHash) {
+    const user = await User.User.find({ tempHash: tempHash });
+    console.log(user);
+    if (user[0]?.active === false) {
+
+        await User.User.updateOne(
+            { tempHash: tempHash },
+            { active: true }
+        );
+        await User.User.updateOne(
+            { tempHash: tempHash },
+            { $unset: {tempHash} }
+        );
+        return { error: false, message: "The user " + user[0]?.userName +  " has successfully been updated in the database"}
+    }
+    else {
+        return { error: true, message: 'Unable to update this user activity...' };
+    }
+}
+/**
+ * 
+ * @param {String} userName the username of the user whose we want to check the active property
+ * @returns whether true of false depending of its active field
+ */
+async function determineUserActiveField(userName){
+
+    const existantUser = await User.User.find({ userName: userName });
+    console.log(existantUser);
+
+    if (existantUser[0]?.userName) {
+        return existantUser[0]?.active;
+    }
+    else {
+        return false; // Since this method will be used in middleware, we return false if we dont find the user
+    }
+}
+
 module.exports = {
     login,
     register,
+    determineUserActiveField,
+    updateUserActivity,
 }

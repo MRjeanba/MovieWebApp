@@ -58,21 +58,10 @@ function App() {
       // Destroy the client token after some time, user won't be able to do request anymore and will be redirected to loginPage
       setTimeout(()=>{
         localStorage.removeItem('token');
-      },3600000);
+      },1800000);
     }
 
   }, [token]);
-
-  // we can manage the authentication here
-  // steps to do next: 1- check in local storage if user has a token,
-  // if he has one, then show him the page and do nothing, if not, ask for credentials of the user 
-  // 2 - credentials are given, request the back end to authenticate and return token if correct (token should have a value and an expires value)
-  // 3 - credentials not correct, then display an error message.
-
-  // no empty array of dependencies, then it is done at each refresh
-  // useEffect(() => {
-    
-  // })
 
   
   return (

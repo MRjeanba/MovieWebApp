@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import MoviesContext from "../Contexts/MoviesContext";
 
 const MoviesProvider = (props) => {
+
     const addMovie = movie => {
         dispatchMoviesAction({ type: 'ADD', movie: movie });
     };
@@ -15,10 +16,10 @@ const MoviesProvider = (props) => {
         return readableMovies;
     };
 
-    const moviesContext = { 
+    const moviesContext = {
         movies: fetchMovies(),
         addMovie: addMovie,
-        removeMovie: removeMovie
+        removeMovie: removeMovie,
     };
 
     const [state, dispatchMoviesAction] = useReducer(reducer, moviesContext);
@@ -32,6 +33,13 @@ const MoviesProvider = (props) => {
             };
         }
         else if (action.type === 'REMOVE'){
+            return {
+                movies: state.movies.filter(item => item._id !== action.id),
+                addMovie,
+                removeMovie,
+            };
+        }
+        else if (action.type === 'UPDATE'){ // Implement the update method to update the movies in real time and get rid of the movie state
             return {
                 movies: state.movies.filter(item => item._id !== action.id),
                 addMovie,

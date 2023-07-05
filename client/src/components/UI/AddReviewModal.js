@@ -43,19 +43,32 @@ const AddReviewModal = (props) => {
             alert("Please, provide a correct number between 0 and 10");
             return;
         }
-        props.currentMovie.localReviews.push(parseInt(reviewRef.current.value));
         const serverResponse = await postReviewScore(reviewEntered,props.currentMovie.id)
         let message = ""
 
         switch (serverResponse.status) {
             case 200:
                 message = serverResponse.message
+                props.currentMovie.localReviews.push(parseInt(reviewRef.current.value));
                 alert(message)
+                break;
+            
+            case 401:
+                message = serverResponse.message
+                alert(message)
+                localStorage.removeItem("token");
+                break;
+            
+            case 403:
+                message = serverResponse.message
+                alert(message)
+                localStorage.removeItem("token");
                 break;
         
             case 500:
                 message = serverResponse.message
                 setErrorMessage(message)
+                localStorage.removeItem("token");
                 break;
 
             default:
