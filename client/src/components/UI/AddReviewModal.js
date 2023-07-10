@@ -53,7 +53,6 @@ const AddReviewModal = (props) => {
                 props.currentMovie.localReviews.push(parseInt(reviewRef.current.value));
                 ctx.movies.map((movie)=>{
                     if(movie._id === props.currentMovie.id){
-                        alert("found equalitY:" + movie._id + " - " + props.currentMovie.id);
                         movie.localReviews.push(parseInt(reviewRef.current.value));
                     }
                 });
