@@ -87,16 +87,19 @@ const LoginPage = (props) => {
     }
 
     return (
-        <div className={classes.modal}>
-            <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
-            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username'/>
-            <input ref={pwdRef} type='password' placeholder='password' />
-            <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
-            <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
-            {isLoading && <p className={classes.update}>Verifying your informations...</p>}
-            {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
-            {isLoading && <LoadingSpinner />}
-        </div>
+        <>
+            <img className={classes.logo} src='/movieIcon.jpg' alt='Oops, it should be a movie icon...' />
+            <div className={classes.modal}>
+                <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
+                <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username' />
+                <input ref={pwdRef} type='password' placeholder='password' />
+                <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
+                <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
+                {isLoading && <p className={classes.update}>Verifying your informations...</p>}
+                {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
+                {isLoading && <LoadingSpinner />}
+            </div>
+        </>
     )
 };
 
