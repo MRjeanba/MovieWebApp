@@ -41,7 +41,7 @@ const MoviesProvider = (props) => {
         }
         else if (action.type === 'UPDATE'){ // Implement the update method to update the movies in real time and get rid of the movie state
             return {
-                movies: state.movies.filter(item => item._id !== action.id),
+                movies: state.movies(item => item._id !== action.id),
                 addMovie,
                 removeMovie,
             };
