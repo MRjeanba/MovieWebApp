@@ -134,7 +134,7 @@ app.post('/api/registerUser', async(req,res) => {
     // since he did not have been verified by the web master, he cannot use the routes of the api (middleware check the active prop)
     //Once the webmaster accepts the user, he should now be able to call the routes of the api once logged in 
 
-    const message = await userRepo.register(userObj);
+    const userRepoResponse = await userRepo.register(userObj);
     const activationLink = "http://localhost:3001/api/user/validateUser/" + userObj.tempHash;
     var mail = {
         from: "frenchWebMaster@outlook.fr",
@@ -151,8 +151,26 @@ app.post('/api/registerUser', async(req,res) => {
             console.log("email is sent, additional info: " + info.accepted + "\n" + response);
         }
     });
-    
-    res.send(JSON.stringify(message));
+
+    // Set a timeout to resolve the race between the login and register function called higher
+    setTimeout(async () => {
+        const token = await userRepo.login(userObj);
+
+        if (!token.login) {
+            res.send(JSON.stringify({ login: false, message: token.message }));
+        } else {
+            // protects the token by providing it only during the requests
+            res.cookie('token', token, {
+                maxAge: 3600000,
+                httpOnly: true
+            });
+            res.send(JSON.stringify({ tokenExpiration: '3600000', login: true, result: userRepoResponse.result, message: userRepoResponse.message }));
+
+        }
+    }
+        , 1000)
+
+    //res.send(JSON.stringify(message));
 
 
 });
