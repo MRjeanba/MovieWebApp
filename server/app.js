@@ -225,7 +225,7 @@ function authenticationMiddleware(req,res,next){
         userName = user.uName;
         const activeValue = await userRepo.determineUserActiveField(userName);
         if(activeValue){
-            next()
+            next();
         } else {
             res.send({error:true, message:"Your account is not accepted yet... You will be able to do operation on the web application once verified",status:200});
         }

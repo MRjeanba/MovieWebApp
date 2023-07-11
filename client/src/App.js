@@ -19,10 +19,6 @@ function App() {
   function authenticate(){
     setToken(()=> localStorage.getItem("token"));
   }
-  function createToken(tokenExpiration){
-    localStorage.setItem("token",tokenExpiration);
-    setToken({ token: tokenExpiration });
-  }
   const showForm = () =>{
     setIsFormShown(true);
   };
@@ -78,7 +74,7 @@ function App() {
         {isLoading && <LoadingSpinner text="Retrieving your movies..." />}
         <MovieItems displayMovie={displayMovieData} />
         {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails} />}
-      </MoviesProvider> : <LoginPage authenticate={authenticate} createToken={createToken}/>
+      </MoviesProvider> : <LoginPage authenticate={authenticate}/>
     }
     </>
     
