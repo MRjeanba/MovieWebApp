@@ -1,9 +1,10 @@
 import classes from './AddReviewModal.module.css';
 import BackDrop from '../UX/BackDrop';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
+import MoviesContext from '../../Contexts/MoviesContext';
 
 const AddReviewModal = (props) => {
-
+    const ctx = useContext(MoviesContext);
     const reviewRef = useRef();
     
     const [errorMessage, setErrorMessage] = useState('')
@@ -50,7 +51,11 @@ const AddReviewModal = (props) => {
             case 200:
                 message = serverResponse.message
                 props.currentMovie.localReviews.push(parseInt(reviewRef.current.value));
-                alert(message)
+                ctx.movies.map((movie)=>{
+                    if(movie._id === props.currentMovie.id){
+                        movie.localReviews.push(parseInt(reviewRef.current.value));
+                    }
+                });
                 break;
             
             case 401:

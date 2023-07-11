@@ -13,12 +13,11 @@ function App() {
   const [ moviesStored, setMoviesStored ] = useState([]); // Deprecated, use the context instead, remove it if nothing breaks
   const [ isLoading, setIsLoading ] = useState(false);
   const [ movieDetails, setMovieDetails ] = useState(null);
-  const [ isAuthenticated, setIsAuthenticated ] = useState(false);
+  const [ token, setToken ] = useState(localStorage.getItem("token"));
 
-  const token = localStorage.getItem("token");
 
   function authenticate(){
-    setIsAuthenticated(true);
+    setToken(()=> localStorage.getItem("token"));
   }
   const showForm = () =>{
     setIsFormShown(true);
@@ -76,7 +75,7 @@ function App() {
         <MovieItems displayMovie={displayMovieData} />
         {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails} />}
       </MoviesProvider> : <LoginPage authenticate={authenticate}/>
-    } 
+    }
     </>
     
 

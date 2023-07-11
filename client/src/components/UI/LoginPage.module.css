@@ -4,7 +4,7 @@
     position: fixed;
     left: 33.33%;
     bottom: 10%;
-    width: 30%;
+    width: 33.33%;
     height: fit-content;
     z-index: 100;
     text-align: center;
@@ -15,6 +15,14 @@
     2px 4px 8px 0px rgba(0, 0, 0, 0.7),
     2px 4px 16px 0px rgba(0, 0, 0, 0.7);
     animation: slide-down 300ms ease-out forwards;
+}
+
+.logo {
+    display: block;
+    max-height: 16rem;
+    max-width: 16rem;
+    margin: auto;
+
 }
 
 @keyframes slide-down{

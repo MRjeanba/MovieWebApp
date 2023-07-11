@@ -28,9 +28,9 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
             },
             body: JSON.stringify(userData)
         });
-
         const message = await response.json(); // the backend returns a message to give info about the user creation process
         alert(message.message);
+        return message;
     }
 };
 
@@ -55,24 +55,31 @@ const LoginPage = (props) => {
 
         //Depending on the button pressed, we do either login or sign in
         if(requestType === "login"){
+            setIsLoading(true);
             const token = await loginSignInFetch(uName, pwd, requestType);
 
             if (!token.login) {
                 setHasError({ message: "The given informations are not correct..." });
+                setIsLoading(false);
             }
             else {
                 localStorage.setItem('token', token.tokenExpiration);
+                setIsLoading(false);
                 props.authenticate();
             }
         } else {
+            setIsLoading(true);
             //store the confirmation message inside of a variable, this message is returned by the BE from a call on a route to create a new user
-            const message = await loginSignInFetch(uName, pwd, requestType);
+            const response = await loginSignInFetch(uName, pwd, requestType);
 
-            if (!message.result) {
-                setHasError({ message: message.message });
+            if (!response.login) {
+                setHasError({ message: response.message });
+                setIsLoading(false);
             }
             else {
-                alert(message.message);
+                localStorage.setItem('token', response.tokenExpiration);
+                setIsLoading(false);
+                props.authenticate();
             }
         }
         
@@ -80,16 +87,19 @@ const LoginPage = (props) => {
     }
 
     return (
-        <div className={classes.modal}>
-            <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
-            <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username'/>
-            <input ref={pwdRef} type='password' placeholder='password' />
-            <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
-            <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
-            {isLoading && <p className={classes.update}>Verifying your informations...</p>}
-            {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
-            {isLoading && <LoadingSpinner />}
-        </div>
+        <>
+            <img className={classes.logo} src='/movieIcon.jpg' alt='Oops, it should be a movie icon...' />
+            <div className={classes.modal}>
+                <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
+                <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username' />
+                <input ref={pwdRef} type='password' placeholder='password' />
+                <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
+                <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
+                {isLoading && <p className={classes.update}>Verifying your informations...</p>}
+                {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
+                {isLoading && <LoadingSpinner />}
+            </div>
+        </>
     )
 };
 
