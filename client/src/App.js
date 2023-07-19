@@ -15,9 +15,24 @@ function App() {
   const [ movieDetails, setMovieDetails ] = useState(null);
   const [ token, setToken ] = useState(localStorage.getItem("token"));
 
+  // if we want to logout the user, we need first to delete its token in the backend and then delete it on the front
+  async function logout(){
+    const response = await fetch("api/logout");
+    const deletion = await response.json();
+
+    if (deletion.status == 200){
+      deleteTokenClientSide()
+    }
+    window.location.reload();
+  }
 
   function authenticate(){
     setToken(()=> localStorage.getItem("token"));
+  }
+  function deleteTokenClientSide(){
+    localStorage.removeItem("token");
+    setToken(()=> "");
+
   }
   const showForm = () =>{
     setIsFormShown(true);
@@ -68,7 +83,7 @@ function App() {
     <>
     { token !== null ?
       <MoviesProvider>
-        <Header showForm={showForm} />
+        <Header showForm={showForm} logout={logout}/>
         {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie} />}
         <InfoPanel />
         {isLoading && <LoadingSpinner text="Retrieving your movies..." />}

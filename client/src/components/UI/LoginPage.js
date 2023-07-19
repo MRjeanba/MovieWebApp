@@ -2,11 +2,6 @@ import { useRef, useState } from 'react';
 import classes from './LoginPage.module.css';
 import LoadingSpinner from '../UX/LoadingSpinner';
 
-/**
- * 
- * TODO: use a better logic to handle the tokens and the validity of them, I think it works well in backend but poorly in front end.
- */
-
 async function loginSignInFetch(uName, pwd, currentFetch) {
     const userData = { userName: uName, password: pwd };
 
@@ -19,7 +14,7 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
             body: JSON.stringify(userData)
         });
         const token = await response.json();
-        return token;
+        return token;       
     } else { // post request to the api to create a new user
         const response = await fetch('api/registerUser', {
             method: "post",

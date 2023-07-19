@@ -4,16 +4,18 @@
 }
 
 header {
-    min-height: 70px;
+    min-height: 90px;
     display: flex;
     color: white;
     width: 100%;
-    justify-content: space-between;
 }
 
+.buttonContainer{
+    margin-left: auto;
+    width: 15%;
+}
 .headerDiv{
-    display: flex;
-    justify-content: space-between;
+
     min-height: 50px;
     height: 100%;
     width: 15%;
@@ -21,10 +23,10 @@ header {
 
 
 .button{
+    margin-left: 15%;
     min-height: 40px;
+    min-width: 85px;
     border-radius: 8px;
-    margin: auto;
-    margin-right: 15px;
     color: #000000;
     background-color: #db9ee2;
     border: 0;
