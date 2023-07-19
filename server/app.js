@@ -116,6 +116,17 @@ app.post('/api/login', async(req, res) => {
 
 });
 
+app.get('/api/logout', async(req,res) => {
+
+    // Grab the user token from the request
+    const token = req.cookies['token'];
+    console.log("user token to be deleted: "+ token?.token);
+
+    // clear it and redirect the user
+    res.clearCookie("token");
+    res.send({status:200,message:"token deleted from the request"});
+});
+
 
 // Route that handles the user creation
 app.post('/api/registerUser', async(req,res) => {
