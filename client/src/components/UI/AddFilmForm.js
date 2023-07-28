@@ -93,8 +93,8 @@ const AddFilmForm = (props) => {
                     <input type='number' name='movieYear' onChange={yearInputChangeHandler} value={yearInput}></input>
                     <Button onClick={props.hideForm}>Cancel</Button>
                     <Button className={formIsInvalid ? classes.disable : undefined}>Add this movie</Button>
-                    {fetchError && <p className={classes.errorFetch}>{fetchError}</p>}
                     {isLoading && <LoadingSpinner text="Adding your movie..." />}
+                    {fetchError && <p className={classes.errorFetch}>{fetchError}</p>}
                 </form>
             </div>
         </>
