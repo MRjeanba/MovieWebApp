@@ -4,40 +4,51 @@
 }
 
 header {
+    position: relative;
+    display: inline-block;
     min-height: 90px;
-    display: flex;
     color: white;
     width: 100%;
 }
 
-.buttonContainer{
-    margin-left: auto;
-    width: 15%;
+.logoTitle {
+    max-height: 55px;
+    margin-left: 0.5%;
+    display: inline;
+    float: left;
 }
-.headerDiv{
-
-    min-height: 50px;
-    height: 100%;
-    width: 15%;
-}
-
-
 .button{
-    margin-left: 15%;
+    position: absolute;
+    right: 1%;
+    top: 8%;
+    margin-right: 8%;
     min-height: 40px;
     min-width: 85px;
     border-radius: 8px;
     color: #000000;
     background-color: #db9ee2;
-    border: 0;
     box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
     1px 2px 4px 0px rgba(255, 255, 255, 0.7),
     2px 4px 8px 0px rgba(255, 255, 255, 0.7),
     2px 4px 16px 0px rgba(255, 255, 255, 0.7);
 }
-.button:hover{
+.button1{
+    position: absolute;
+    right: 0.1%;
+    top: 8%;
+    min-height: 40px;
+    min-width: 85px;
+    border-radius: 8px;
+    color: #000000;
+    background-color: #db9ee2;
+    box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
+    1px 2px 4px 0px rgba(255, 255, 255, 0.7),
+    2px 4px 8px 0px rgba(255, 255, 255, 0.7),
+    2px 4px 16px 0px rgba(255, 255, 255, 0.7);
+}
+.button:hover , .button1:hover{
     height: 55px;
-    width: 100px;
+    width: 90px;
     background-color: #dd77dd;
     border-radius: 9px;
     box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
@@ -47,7 +58,6 @@ header {
 }
 
 .button:active{
-    
     height: 55px;
     width: 95px;
     background-color: #dd77dd;
@@ -57,13 +67,49 @@ header {
     2px 4px 16px 0px rgba(0, 0, 0, 0.7);
 }
 
-h2{
+.h2Header{
     padding-top: 1%;
-    margin-left: 2%;
+    max-width: 30%;
 }
 
-.logoTitle {
-    max-height: 55px;
-    margin-left: 0.5%;
-
+@media (max-width:480px){
+     * {
+        font-size: medium;
+        font-weight: normal;
+     }
+    
+    .logoTitle {
+        max-height: 45px;
+        margin-left: 0.25%;
+    }
+    .button{
+        position: absolute;
+        right: 2%;
+        top: 8%;
+        margin-right: 25%;
+        max-height: 40px;
+        max-width: 46px;
+        border-radius: 8px;
+        color: #000000;
+        background-color: #db9ee2;
+        box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
+        1px 2px 4px 0px rgba(255, 255, 255, 0.7),
+        2px 4px 8px 0px rgba(255, 255, 255, 0.7),
+        2px 4px 16px 0px rgba(255, 255, 255, 0.7);
+    }
+    .button1{
+        position: absolute;
+        right: 0%;
+        top: 8%;
+        min-height: 40px;
+        max-width: 46px;
+        border-radius: 8px;
+        color: #000000;
+        background-color: #db9ee2;
+        box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
+        1px 2px 4px 0px rgba(255, 255, 255, 0.7),
+        2px 4px 8px 0px rgba(255, 255, 255, 0.7),
+        2px 4px 16px 0px rgba(255, 255, 255, 0.7);
+    }
+    
 }
