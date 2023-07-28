@@ -40,3 +40,16 @@
   max-height: 70%;
   min-width: 90%;
 }
+
+@media (max-width:480px){
+
+  .movieItem {
+    min-height: 300px;
+    width: 100%;
+    flex-basis: 75%;
+  }
+
+  .img{
+    max-height: 210px;
+  }
+}
