@@ -37,7 +37,7 @@ header {
 }
 .button:hover{
     height: 55px;
-    width: 95px;
+    width: 100px;
     background-color: #dd77dd;
     border-radius: 9px;
     box-shadow: 0px 1px 2px 0px rgba(255, 255, 255, 0.7),
