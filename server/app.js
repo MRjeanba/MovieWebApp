@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect("mongodb://localhost:27017/movieDB");
+mongoose.connect("mongodb+srv://jeanba19:"+process.env.CLUSTER+"@clustermoviewebapp.2rflxi7.mongodb.net/movieDB");
 
 
 const apiKey = process.env.APIKEY;
