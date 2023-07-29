@@ -52,6 +52,10 @@ function App() {
 
   };
 
+  const bringUpFilteredMovies = (filteredMovies) => {
+    setMoviesStored(filteredMovies);
+  };
+
 
   const firstFetch = async () => {
     setIsLoading(true);
@@ -85,9 +89,9 @@ function App() {
       <MoviesProvider>
         <Header showForm={showForm} logout={logout}/>
         {isFormShown && <AddFilmForm hideForm={hideForm} addMovie={addMovie} />}
-        <InfoPanel />
+        <InfoPanel bringUpFilteredMovies={bringUpFilteredMovies}/>
         {isLoading && <LoadingSpinner text="Retrieving your movies..." />}
-        <MovieItems displayMovie={displayMovieData} />
+        <MovieItems filteredMovies={moviesStored} displayMovie={displayMovieData} />
         {movieDetails != null && <MovieDetails displayMovieData={displayMovieData} details={movieDetails} />}
       </MoviesProvider> : <LoginPage authenticate={authenticate}/>
     }

@@ -9,7 +9,7 @@ import MoviesContext from '../../Contexts/MoviesContext';
 
 const MovieItems = (props) => {
     const ctx = useContext(MoviesContext);
-    console.log(ctx.movies[0]);
+    console.log(props.filteredMovies);
     
     const noMoviesMessage = <p className={styles.noMovies}>You have no movies yet, hit the add movie button !</p>;
     const moviesAvailable = <div>
@@ -18,8 +18,15 @@ const MovieItems = (props) => {
         </ul>
     </div>;
 
+    const moviesFiltered = <div>
+        <ul className={styles.items}>
+            {props.filteredMovies.length > 0 && props.filteredMovies.map((movie) => { return (<MovieItem displayMovie={props.displayMovie} movie={movie} key={movie.id} />) })}
+        </ul>
+    </div>;
+
+
     return (
-        ctx.movies.length === 0 ? noMoviesMessage : moviesAvailable
+        props.filteredMovies.length < 1 ? (ctx.movies.length === 0 ? noMoviesMessage : moviesAvailable) : moviesFiltered
     )
 };
 
