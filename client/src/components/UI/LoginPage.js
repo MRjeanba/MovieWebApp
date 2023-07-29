@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import classes from './LoginPage.module.css';
 import LoadingSpinner from '../UX/LoadingSpinner';
+import Button from './Button';
 
 async function loginSignInFetch(uName, pwd, currentFetch) {
     const userData = { userName: uName, password: pwd };
@@ -88,8 +89,8 @@ const LoginPage = (props) => {
                 <h2 className={classes.title}>You need to log in or create an account to continue!</h2>
                 <input ref={uNameRef} className={classes.firstInput} type='text' placeholder='username' />
                 <input ref={pwdRef} type='password' placeholder='password' />
-                <button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Sign in</button>
-                <button className={classes.modalButton} onClick={() => loginHandler("register")}>Create account</button>
+                <Button className={classes.modalButton} name='login' onClick={() => loginHandler("login")}>Log in</Button>
+                <Button className={classes.modalButton} onClick={() => loginHandler("register")}>Create an account</Button>
                 {isLoading && <p className={classes.update}>Verifying your informations...</p>}
                 {hasError && <p className={classes.errorUpdate}>{hasError.message}</p>}
                 {isLoading && <LoadingSpinner />}

@@ -33,3 +33,31 @@
     margin-left: 83%;
     color:black;
 }
+
+@media (max-width:480px){
+    .panel{
+        border-radius: 5px;
+        width: 55%;
+        margin: auto;
+        margin-top: 15%;
+        min-height: 15%;
+        text-align: center;
+    }
+
+    .searchInput{
+        margin: 0;
+        margin-top: 8px;
+        margin-left: 45%;
+        width: 45%; 
+        height: 16px;
+    }
+    .text{
+        width: 70%;
+        font-weight:normal;
+    }
+    .text.title{
+        margin-bottom: 2%;
+        font-weight:bolder;
+
+    }
+}

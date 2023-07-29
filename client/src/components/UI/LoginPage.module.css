@@ -1,3 +1,4 @@
+
 .modal {
     border-radius: 9px;
     top: 30%;
@@ -54,4 +55,36 @@
 }
 .firstInput{
     margin-top: 4%;
+}
+
+@media (max-width:480px){
+
+    .logo {
+        display: block;
+        max-height: 8rem;
+        max-width: 8rem;
+        margin: auto;
+    }
+
+    .modal {
+        border-radius: 9px;
+        top: 25%;
+        left: 20%;
+        bottom: 10%;
+        width: 60%;
+        height: fit-content;
+        text-align: center;
+    }
+
+    .firstInput{
+        margin-top: 4%;
+    }
+    .title{
+        font-size: large;
+    }
+    .modalButton{
+        max-height: 90px;
+        min-width: 95px;
+    }
+
 }

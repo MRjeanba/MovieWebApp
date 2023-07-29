@@ -106,3 +106,20 @@ button:active{
     font-size: large;
     font-weight: bold;
 }
+
+@media (max-width:480px){
+
+    .modal {
+        top: 20vh;
+        position: fixed;
+        left: 15%;
+        bottom: 10%;
+        width: 70%;
+        height: 60%;
+        text-align: center;
+    }
+    button{
+        margin: auto;
+        margin-top: 8px;
+    }
+}

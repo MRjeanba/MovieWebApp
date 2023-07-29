@@ -14,8 +14,6 @@ const AddFilmForm = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const moviesContext = useContext(MoviesContext);
 
-    let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
-
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovie(EnteredName, enteredYear) {
         const response = await fetch('api/' + EnteredName + '/' + enteredYear,
@@ -93,8 +91,8 @@ const AddFilmForm = (props) => {
                     <input type='number' name='movieYear' onChange={yearInputChangeHandler} value={yearInput}></input>
                     <Button onClick={props.hideForm}>Cancel</Button>
                     <Button className={formIsInvalid ? classes.disable : undefined}>Add this movie</Button>
-                    {fetchError && <p className={classes.errorFetch}>{fetchError}</p>}
                     {isLoading && <LoadingSpinner text="Adding your movie..." />}
+                    {fetchError && <p className={classes.errorFetch}>{fetchError}</p>}
                 </form>
             </div>
         </>

@@ -8,7 +8,6 @@ import styles from './MovieItem.module.css';
 export const getAverageReview = (movie) => {
     let avg = 0
 
-    console.log("See here: " + Object.values(movie))
     if (movie.localReviews.length === undefined || movie.localReviews.length === 0) {
         return -1
     }

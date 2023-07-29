@@ -26,7 +26,6 @@
     margin: 0;
     margin: auto;
     margin-top: 10%;
-
 }
 
 .checked {
@@ -61,4 +60,30 @@
     display: inline-block;
     margin: auto;
     margin-top: 1%;
+}
+
+@media (max-width:480px){
+    .modal {
+        top: 25%;
+        height: 50%;
+        width: 90%;
+        left: 5%;
+    }
+    .imgDetails{
+        width: 90%;
+        height: 60%;
+        margin-top: 10%;
+        border-radius: 7px;
+    }
+    .overview {
+        font-size:small;
+    }
+    .title{
+        font-size: large;
+    }
+    .rating {
+        font-size: medium;
+    }
+
+
 }
