@@ -14,8 +14,6 @@ const AddFilmForm = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const moviesContext = useContext(MoviesContext);
 
-    let errorMessage = <p className={classes.errorFetch}>An error occured while searching for your movie... Please retry!</p>;
-
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovie(EnteredName, enteredYear) {
         const response = await fetch('api/' + EnteredName + '/' + enteredYear,

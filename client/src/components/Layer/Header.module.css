@@ -72,6 +72,13 @@ header {
     max-width: 30%;
 }
 
+@media (max-width:1200px){
+    .button{
+        margin-right: 16%;
+    }
+
+}
+
 @media (max-width:480px){
      * {
         font-size: medium;
@@ -87,8 +94,8 @@ header {
         right: 2%;
         top: 8%;
         margin-right: 25%;
-        max-height: 40px;
-        max-width: 46px;
+        max-height: 32px;
+        max-width: 40px;
         border-radius: 8px;
         color: #000000;
         background-color: #db9ee2;
@@ -99,10 +106,10 @@ header {
     }
     .button1{
         position: absolute;
-        right: 0%;
+        right: 2%;
         top: 8%;
-        min-height: 40px;
-        max-width: 46px;
+        max-height: 32px;
+        max-width: 40px;
         border-radius: 8px;
         color: #000000;
         background-color: #db9ee2;
@@ -113,3 +120,4 @@ header {
     }
     
 }
+

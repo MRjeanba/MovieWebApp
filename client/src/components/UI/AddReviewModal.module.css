@@ -58,3 +58,17 @@
 .reviewInput{
     margin-top: 4%;
 }
+
+@media (max-width:480px){
+
+    .title{
+        font-size:large;
+    }
+
+    .modal {
+        height: 20%;
+        left: 20%;
+        width: 60%;
+    }
+
+}

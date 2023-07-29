@@ -26,3 +26,9 @@
 .item:hover{
     background-color: rgb(124, 124, 148);
 }
+
+@media (max-width:480px){
+    .menu{
+        position: absolute;
+    }
+}
