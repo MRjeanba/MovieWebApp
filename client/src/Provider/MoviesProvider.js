@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import MoviesContext from "../Contexts/MoviesContext";
 
 const MoviesProvider = (props) => {
+    const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
 
     const addMovie = movie => {
         dispatchMoviesAction({ type: 'ADD', movie: movie });
@@ -11,7 +12,7 @@ const MoviesProvider = (props) => {
     };
 
     const fetchMovies = async () => {
-        const response = await fetch("api/storedMovies");
+        const response = await fetch(apiUrl+"api/storedMovies");
         const readableMovies = await response.json();
         return readableMovies;
     };

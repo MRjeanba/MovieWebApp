@@ -16,7 +16,6 @@ const MovieRepository = require('./Repository/MovieRepository');
 const { findAllMovies } = require('./Repository/MovieRepository');
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-
 // set up of the mail transport object
 var smtpTransport = nodemailer.createTransport({
     host: "smtp.office365.com",

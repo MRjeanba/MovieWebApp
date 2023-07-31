@@ -7,7 +7,7 @@ import MoviesContext from '../../Contexts/MoviesContext';
 
 
 const AddFilmForm = (props) => {
-
+    const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
     const [fetchError, setFetchError] = useState(null);
     const [nameInput, setnameInput] = useState('');
     const [yearInput, setyearInput] = useState('');
@@ -16,7 +16,7 @@ const AddFilmForm = (props) => {
 
     // fetch movies, we make a request to the back end that will make requests to the TMDB API
     async function fetchMovie(EnteredName, enteredYear) {
-        const response = await fetch('api/' + EnteredName + '/' + enteredYear,
+        const response = await fetch(apiUrl+'api/' + EnteredName + '/' + enteredYear,
             {
                 headers: {
                     'Accept': 'application/json',

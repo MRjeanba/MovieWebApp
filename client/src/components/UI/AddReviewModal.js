@@ -4,6 +4,7 @@ import { useContext, useRef, useState } from 'react';
 import MoviesContext from '../../Contexts/MoviesContext';
 
 const AddReviewModal = (props) => {
+    const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
     const ctx = useContext(MoviesContext);
     const reviewRef = useRef();
     
@@ -18,7 +19,7 @@ const AddReviewModal = (props) => {
     async function postReviewScore(reviewEntered, movieId) {
 
         const obj = { review: reviewEntered, movieId: movieId }
-        const response = await fetch('api/AddReview',
+        const response = await fetch(apiUrl+'api/AddReview',
             {
                 method: "post",
                 headers: {

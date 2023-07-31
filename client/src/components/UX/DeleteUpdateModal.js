@@ -3,10 +3,11 @@ import BackDrop from './BackDrop';
 import classes from './DeleteUpdateModal.module.css';
 import LoadinSpinner from '../UX/LoadingSpinner';
 import MoviesContext from '../../Contexts/MoviesContext';
+const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
 
 async function deleteFetchCall(movieId){
 
-    const response = await fetch('api/delete',{
+    const response = await fetch(apiUrl+'api/delete',{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'

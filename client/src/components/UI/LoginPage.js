@@ -5,9 +5,10 @@ import Button from './Button';
 
 async function loginSignInFetch(uName, pwd, currentFetch) {
     const userData = { userName: uName, password: pwd };
+    const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
 
     if (currentFetch === "login") { // post request to api to create a token
-        const response = await fetch('api/login', {
+        const response = await fetch(apiUrl+'api/login', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +18,7 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
         const token = await response.json();
         return token;       
     } else { // post request to the api to create a new user
-        const response = await fetch('api/registerUser', {
+        const response = await fetch(apiUrl+'api/registerUser', {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

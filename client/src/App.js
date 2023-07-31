@@ -14,10 +14,11 @@ function App() {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ movieDetails, setMovieDetails ] = useState(null);
   const [ token, setToken ] = useState(localStorage.getItem("token"));
+  const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
 
   // if we want to logout the user, we need first to delete its token in the backend and then delete it on the front
   async function logout(){
-    const response = await fetch("api/logout");
+    const response = await fetch(apiUrl+"api/logout");
     const deletion = await response.json();
 
     if (deletion.status == 200){
@@ -59,7 +60,7 @@ function App() {
 
   const firstFetch = async () => {
     setIsLoading(true);
-    const response = await fetch("api/storedMovies");
+    const response = await fetch(apiUrl+"api/storedMovies");
     const readableMovies = await response.json();
     console.log(readableMovies);
     setMoviesStored([...readableMovies]);
@@ -100,6 +101,4 @@ function App() {
 
   );
 }
-
 export default App;
- 
