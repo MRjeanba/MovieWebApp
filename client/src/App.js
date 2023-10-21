@@ -17,11 +17,11 @@ function App() {
   const apiUrl = "https://frozen-beach-71970-3182c8239bba.herokuapp.com/";
 
   // if we want to logout the user, we need first to delete its token in the backend and then delete it on the front
-  async function logout(){
-    const response = await fetch(apiUrl+"api/logout");
+  async function logout() {
+    const response = await fetch(apiUrl + "api/logout");
     const deletion = await response.json();
 
-    if (deletion.status == 200){
+    if (deletion.status === 200){
       deleteTokenClientSide()
     }
     window.location.reload();

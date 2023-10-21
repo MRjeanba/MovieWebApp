@@ -30,9 +30,14 @@ On each CRUD routes of the api, I added a middleware responsible to check if the
 If yes, then we proceed the call. Also, the middleware check if the user has been verified, if not we warn him that its account is not verified yet.    
 ![Alt text](/Middleware-Design.png?raw=true "")  
 
+# Things to improve
+In the future, it would be better to incorporate a mechanism in order to let users create groups, these groups could be filled with other users by the creator and the only movies that users could see  
+would be the movies contained in that group.  
+
 
 # How to run the project:
-More to come soon...
+More to come soon...  
+I just need to change the endpoints and make them aim to localhost to help users test this app.
 But node.js, express, mongodb and react will be necessary
 
 # Design of the project:

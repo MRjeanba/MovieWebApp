@@ -21,6 +21,10 @@ const AddFilmForm = (props) => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    credentials: "include",
+                },
+                body:{
+                    token:localStorage.getItem('token')
                 }
             });
 
@@ -56,7 +60,7 @@ const AddFilmForm = (props) => {
             if (movie.message) {
                 console.log(movie.message);
                 setFetchError(movie.message);
-                if(movie.status === 401 || movie.status === 401) {
+                if(movie.status === 401 || movie.status === 403) {
                     localStorage.removeItem("token");
                 }
             }

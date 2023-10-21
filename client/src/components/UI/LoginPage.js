@@ -11,7 +11,8 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
         const response = await fetch(apiUrl+'api/login', {
             method: "post",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                credentials: 'include'                
             },
             body: JSON.stringify(userData)
         });
@@ -21,9 +22,10 @@ async function loginSignInFetch(uName, pwd, currentFetch) {
         const response = await fetch(apiUrl+'api/registerUser', {
             method: "post",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(userData)
+/*             credentials: 'include',
+ */            body: JSON.stringify(userData)
         });
         const message = await response.json(); // the backend returns a message to give info about the user creation process
         alert(message.message);
@@ -60,7 +62,8 @@ const LoginPage = (props) => {
                 setIsLoading(false);
             }
             else {
-                localStorage.setItem('token', token.tokenExpiration);
+                localStorage.setItem('tokenTime', token.tokenExpiration);
+                localStorage.setItem('token', token.token);
                 setIsLoading(false);
                 props.authenticate();
             }
@@ -74,7 +77,8 @@ const LoginPage = (props) => {
                 setIsLoading(false);
             }
             else {
-                localStorage.setItem('token', response.tokenExpiration);
+                localStorage.setItem('tokenTime', response.tokenExpiration);
+                localStorage.setItem('token', response.token);
                 setIsLoading(false);
                 props.authenticate();
             }
